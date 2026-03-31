@@ -1,0 +1,40 @@
+{
+  "nav": { "courses": "Courses", "staff": "Staff", "logout": "Log out" },
+  "landing": { "title": "Termínář", "tagline": "Course management for your organization", "createWorkspace": "Create your workspace", "login": "Log in" },
+  "auth": { "login": "Log in", "email": "Email", "password": "Password", "loginButton": "Log in", "invalidCredentials": "Invalid credentials. Please try again.", "loggingIn": "Logging in..." },
+  "tenants": { "register": "Create workspace", "orgName": "Organization name", "orgNamePlaceholder": "Acme Corp", "slug": "Workspace identifier", "slugHint": "Lowercase letters, digits, hyphens. 3–63 characters.", "language": "Default language", "langEn": "English", "langCs": "Czech", "adminUsername": "Admin username", "adminEmail": "Admin email", "adminPassword": "Admin password", "confirmPassword": "Confirm password", "passwordMismatch": "Passwords do not match", "creating": "Creating workspace...", "slugTaken": "This workspace identifier is already taken.", "createButton": "Create workspace" },
+  "courses": {
+    "title": "Courses", "newCourse": "New Course", "listView": "List", "calendarView": "Calendar",
+    "noCourses": "No courses yet", "noCoursesHint": "Create your first course to get started.",
+    "columns": { "title": "Title", "type": "Type", "status": "Status", "capacity": "Capacity", "sessions": "Sessions", "firstSession": "First Session" },
+    "types": { "OneTime": "One-time", "MultiSession": "Multi-session" },
+    "modes": { "Open": "Open", "StaffOnly": "Staff only" },
+    "statuses": { "Draft": "Draft", "Active": "Active", "Cancelled": "Cancelled", "Completed": "Completed" },
+    "create": "Create Course", "edit": "Edit Course", "cancel": "Cancel Course",
+    "cancelConfirm": "Are you sure you want to cancel this course? This cannot be undone.",
+    "cancelSuccess": "Course cancelled.", "createSuccess": "Course created.", "updateSuccess": "Course updated.",
+    "detail": { "sessions": "Sessions", "viewRoster": "View Roster", "editCourse": "Edit", "createdAt": "Created", "updatedAt": "Updated", "noSessions": "No sessions scheduled." },
+    "form": { "title": "Title", "description": "Description", "courseType": "Course type", "registrationMode": "Registration mode", "capacity": "Max capacity", "sessions": "Sessions", "addSession": "Add session", "removeSession": "Remove", "scheduledAt": "Date & time", "durationMinutes": "Duration (minutes)", "location": "Location (optional)", "futureDateRequired": "Session must be scheduled in the future.", "saveButton": "Save", "cancelButton": "Cancel" }
+  },
+  "sessions": { "columns": { "sequence": "#", "scheduledAt": "Date & Time", "duration": "Duration", "location": "Location", "endsAt": "Ends At" }, "minutes": "min" },
+  "registrations": {
+    "title": "Registrations", "addRegistration": "Add Registration", "noRegistrations": "No registrations yet.",
+    "columns": { "name": "Name", "email": "Email", "source": "Source", "status": "Status", "registeredAt": "Registered At" },
+    "sources": { "SelfService": "Self-service", "StaffAdded": "Staff added" },
+    "statuses": { "Confirmed": "Confirmed", "Cancelled": "Cancelled" },
+    "filter": { "all": "All", "confirmed": "Confirmed", "cancelled": "Cancelled" },
+    "form": { "participantName": "Participant name", "participantEmail": "Participant email", "submitButton": "Add registration", "fullCapacity": "This course is at full capacity." },
+    "cancelConfirm": "Cancel this registration?", "cancelSuccess": "Registration cancelled.", "addSuccess": "Registration added."
+  },
+  "staff": {
+    "title": "Staff", "addStaff": "Add Staff User", "noStaff": "No staff users yet.",
+    "columns": { "username": "Username", "email": "Email", "role": "Role", "status": "Status", "createdAt": "Created" },
+    "roles": { "Admin": "Admin", "Staff": "Staff" },
+    "statuses": { "Active": "Active", "Inactive": "Inactive" },
+    "deactivate": "Deactivate", "deactivateConfirm": "Deactivate this staff user? They will no longer be able to log in.",
+    "deactivateSuccess": "Staff user deactivated.", "createSuccess": "Staff user created.",
+    "form": { "username": "Username", "email": "Email", "password": "Password", "role": "Role", "submitButton": "Create user" },
+    "accessDenied": "You need admin privileges to manage staff users."
+  },
+  "common": { "loading": "Loading...", "save": "Save", "cancel": "Cancel", "confirm": "Confirm", "back": "Back", "notFound": "Page not found", "notFoundHint": "The page you are looking for does not exist.", "backHome": "Back to home", "error": "An error occurred. Please try again.", "serverError": "Server error. Please try again later.", "connectionError": "Connection error. Please check your network.", "required": "This field is required.", "invalidEmail": "Enter a valid email address." }
+}

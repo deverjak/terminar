@@ -23,6 +23,7 @@ public static class TenantsModule
 
             await mediator.Send(new CreateStaffUserCommand(
                 TenantId.From(tenant.TenantId),
+                tenant.Slug,
                 req.AdminUsername,
                 req.AdminEmail,
                 req.AdminPassword,

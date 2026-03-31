@@ -32,8 +32,10 @@ public sealed class JwtTokenService(
             new Claim(JwtRegisteredClaimNames.Sub, user.Id),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim("tenant_id", user.TenantId.ToString()),
+            new Claim("tenant_slug", user.TenantSlug),
             new Claim(ClaimTypes.Role, user.Role),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty)
+            new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+            new Claim("username", user.UserName ?? string.Empty)
         };
 
         var token = new JwtSecurityToken(

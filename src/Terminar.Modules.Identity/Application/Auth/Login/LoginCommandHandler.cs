@@ -14,7 +14,7 @@ public sealed class LoginCommandHandler(
 {
     public async Task<LoginResult> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByNameAsync(request.Username)
+        var user = await userManager.FindByEmailAsync(request.Email)
             ?? throw new ForbiddenException("Invalid credentials.");
 
         if (!user.IsActive)
@@ -31,6 +31,6 @@ public sealed class LoginCommandHandler(
         var accessToken = jwtTokenService.GenerateAccessToken(user);
         var refreshToken = await jwtTokenService.GenerateRefreshTokenAsync(user);
 
-        return new LoginResult(accessToken, refreshToken, ExpiresIn: 3600);
+        return new LoginResult(accessToken, refreshToken, ExpiresIn: 3600, TenantSlug: user.TenantSlug);
     }
 }
