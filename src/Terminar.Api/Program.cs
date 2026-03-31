@@ -3,6 +3,7 @@ using Scalar.AspNetCore;
 using Terminar.Api.Infrastructure;
 using Terminar.Api.Middleware;
 using Terminar.Api.Modules;
+using Terminar.Api.Notifications;
 using Terminar.Api.Pipeline;
 using Terminar.Modules.Courses.Infrastructure;
 using Terminar.Modules.Identity.Infrastructure;
@@ -34,6 +35,9 @@ builder.Services.AddRegistrationsModule(connectionString);
 // Tenant resolution
 builder.Services.AddScoped<ITenantContext, TenantContext>();
 
+// Email notifications (stub)
+builder.Services.AddScoped<IEmailNotificationService, StubEmailNotificationService>();
+
 // Background services
 builder.Services.AddHostedService<DatabaseMigrationService>();
 
@@ -42,10 +46,11 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseMiddleware<TenantResolutionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<TenantResolutionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -59,6 +64,7 @@ app.MapDefaultEndpoints();
 app.MapTenantsEndpoints();
 app.MapIdentityEndpoints();
 app.MapCoursesEndpoints();
+app.MapRegistrationsEndpoints();
 
 app.MapGet("/health", () => Results.Ok(new { status = "healthy" })).AllowAnonymous();
 

@@ -15,7 +15,7 @@ public static class IdentityModule
     public static IEndpointRouteBuilder MapIdentityEndpoints(this IEndpointRouteBuilder app)
     {
         // Auth endpoints — no auth required
-        var auth = app.MapGroup("/api/auth").WithTags("Auth");
+        var auth = app.MapGroup("/api/v1/auth").WithTags("Auth");
 
         auth.MapPost("/login", async (
             [FromBody] LoginRequest req,
@@ -36,7 +36,7 @@ public static class IdentityModule
         });
 
         // Staff management — admin only
-        var staff = app.MapGroup("/api/staff")
+        var staff = app.MapGroup("/api/v1/staff")
             .RequireAuthorization("AdminOnly")
             .WithTags("Staff");
 
@@ -59,7 +59,7 @@ public static class IdentityModule
             var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
             var result = await mediator.Send(
                 new CreateStaffUserCommand(tenantId, req.Username, req.Email, req.Password, req.Role), ct);
-            return Results.Created($"/api/staff/{result.StaffUserId}", result);
+            return Results.Created($"/api/v1/staff/{result.StaffUserId}", result);
         });
 
         staff.MapPost("/{id:guid}/deactivate", async (

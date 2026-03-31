@@ -16,7 +16,7 @@ public sealed class CreateCourseValidator : AbstractValidator<CreateCourseComman
         RuleForEach(x => x.Sessions).ChildRules(s =>
         {
             s.RuleFor(x => x.DurationMinutes).GreaterThan(0);
-            s.RuleFor(x => x.ScheduledAt).GreaterThan(DateTimeOffset.UtcNow);
+            s.RuleFor(x => x.ScheduledAt).GreaterThan(DateTime.UtcNow);
         });
     }
 }

@@ -5,7 +5,7 @@ namespace Terminar.Modules.Tenants.Domain.Events;
 
 public sealed record TenantCreated(
     Guid EventId,
-    DateTimeOffset OccurredAt,
+    DateTime OccurredAt,
     TenantId TenantId,
     string Name,
     string Slug) : IDomainEvent;

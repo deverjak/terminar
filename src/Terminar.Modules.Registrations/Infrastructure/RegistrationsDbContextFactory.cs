@@ -11,6 +11,6 @@ public sealed class RegistrationsDbContextFactory : IDesignTimeDbContextFactory<
             .UseNpgsql("Host=localhost;Database=terminar;Username=postgres;Password=postgres")
             .Options;
 
-        return new RegistrationsDbContext(opts);
+        return new RegistrationsDbContext(opts, null!);
     }
 }

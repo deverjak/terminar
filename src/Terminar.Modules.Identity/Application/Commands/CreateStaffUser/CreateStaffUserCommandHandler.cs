@@ -42,6 +42,6 @@ public sealed class CreateStaffUserCommandHandler(UserManager<AppIdentityUser> u
             identityUser.UserName,
             identityUser.Email,
             identityUser.Role,
-            DateTimeOffset.UtcNow);
+            DateTime.UtcNow);
     }
 }

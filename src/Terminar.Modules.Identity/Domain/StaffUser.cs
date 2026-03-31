@@ -11,8 +11,8 @@ public sealed class StaffUser : AggregateRoot<Guid>
     public Email Email { get; private set; } = default!;
     public StaffRole Role { get; private set; }
     public StaffUserStatus Status { get; private set; }
-    public DateTimeOffset CreatedAt { get; private set; }
-    public DateTimeOffset? LastLoginAt { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime? LastLoginAt { get; private set; }
 
     private StaffUser() { }
 
@@ -30,7 +30,7 @@ public sealed class StaffUser : AggregateRoot<Guid>
             Email = email,
             Role = role,
             Status = StaffUserStatus.Active,
-            CreatedAt = DateTimeOffset.UtcNow
+            CreatedAt = DateTime.UtcNow
         };
 
         user.RaiseDomainEvent(new StaffUserCreated(
@@ -50,7 +50,7 @@ public sealed class StaffUser : AggregateRoot<Guid>
         Status = StaffUserStatus.Deactivated;
     }
 
-    public void RecordLogin() => LastLoginAt = DateTimeOffset.UtcNow;
+    public void RecordLogin() => LastLoginAt = DateTime.UtcNow;
 
     public bool IsActive() => Status == StaffUserStatus.Active;
 }

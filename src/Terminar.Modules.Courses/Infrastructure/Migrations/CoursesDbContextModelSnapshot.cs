@@ -37,7 +37,7 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("CreatedByStaffId")
@@ -66,7 +66,7 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<DateTimeOffset>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -92,7 +92,7 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.Property<DateTimeOffset>("ScheduledAt")
+                    b.Property<DateTime>("ScheduledAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Sequence")

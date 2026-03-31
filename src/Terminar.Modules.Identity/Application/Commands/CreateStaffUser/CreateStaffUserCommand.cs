@@ -10,4 +10,4 @@ public sealed record CreateStaffUserCommand(
     string Password,
     string Role) : IRequest<CreateStaffUserResult>;
 
-public sealed record CreateStaffUserResult(Guid StaffUserId, string Username, string Email, string Role, DateTimeOffset CreatedAt);
+public sealed record CreateStaffUserResult(Guid StaffUserId, string Username, string Email, string Role, DateTime CreatedAt);

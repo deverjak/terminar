@@ -64,6 +64,30 @@ public sealed class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<Ex
                 Status = StatusCodes.Status403Forbidden
             });
         }
+        catch (ArgumentException ex)
+        {
+            logger.LogWarning("Invalid argument: {Message}", ex.Message);
+            context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+            await context.Response.WriteAsJsonAsync(new ProblemDetails
+            {
+                Type = "https://terminar.app/errors/unprocessable",
+                Title = "Request cannot be processed.",
+                Detail = ex.Message,
+                Status = StatusCodes.Status422UnprocessableEntity
+            });
+        }
+        catch (UnprocessableException ex)
+        {
+            logger.LogWarning("Unprocessable: {Message}", ex.Message);
+            context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+            await context.Response.WriteAsJsonAsync(new ProblemDetails
+            {
+                Type = "https://terminar.app/errors/unprocessable",
+                Title = "Request cannot be processed.",
+                Detail = ex.Message,
+                Status = StatusCodes.Status422UnprocessableEntity
+            });
+        }
         catch (Exception ex)
         {
             logger.LogError(ex, "Unhandled exception");

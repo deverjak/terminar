@@ -16,8 +16,8 @@ public sealed class Course : AggregateRoot<Guid>
     public int Capacity { get; private set; }
     public CourseStatus Status { get; private set; }
     public Guid CreatedByStaffId { get; private set; }
-    public DateTimeOffset CreatedAt { get; private set; }
-    public DateTimeOffset UpdatedAt { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
     public IReadOnlyList<Session> Sessions => _sessions.AsReadOnly();
 
     private Course() { }
@@ -29,7 +29,7 @@ public sealed class Course : AggregateRoot<Guid>
         CourseType courseType,
         RegistrationMode registrationMode,
         int capacity,
-        IEnumerable<(DateTimeOffset ScheduledAt, int DurationMinutes, string? Location)> sessionInputs,
+        IEnumerable<(DateTime ScheduledAt, int DurationMinutes, string? Location)> sessionInputs,
         Guid createdByStaffId)
     {
         ArgumentNullException.ThrowIfNull(tenantId);
@@ -44,7 +44,7 @@ public sealed class Course : AggregateRoot<Guid>
         ValidateSessionCount(courseType, sessions.Count);
         ValidateNoSessionOverlap(sessions);
 
-        var now = DateTimeOffset.UtcNow;
+        var now = DateTime.UtcNow;
         var course = new Course
         {
             Id = Guid.NewGuid(),
@@ -77,7 +77,7 @@ public sealed class Course : AggregateRoot<Guid>
             Capacity = capacity.Value;
         }
         if (registrationMode is not null) RegistrationMode = registrationMode.Value;
-        UpdatedAt = DateTimeOffset.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
     }
 
     public void Cancel()
@@ -86,7 +86,7 @@ public sealed class Course : AggregateRoot<Guid>
             throw new InvalidOperationException($"Cannot cancel a course with status '{Status}'.");
 
         Status = CourseStatus.Cancelled;
-        UpdatedAt = DateTimeOffset.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
         RaiseDomainEvent(new CourseCancelled(Guid.NewGuid(), UpdatedAt, Id, TenantId));
     }
 
@@ -95,7 +95,7 @@ public sealed class Course : AggregateRoot<Guid>
         if (Status != CourseStatus.Active)
             throw new InvalidOperationException("Only Active courses can be completed.");
         Status = CourseStatus.Completed;
-        UpdatedAt = DateTimeOffset.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
     }
 
     private void EnsureEditable()

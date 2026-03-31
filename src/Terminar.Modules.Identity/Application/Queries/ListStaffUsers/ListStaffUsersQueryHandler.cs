@@ -20,6 +20,6 @@ public sealed class ListStaffUsersQueryHandler(UserManager<AppIdentityUser> user
             u.Email ?? string.Empty,
             u.Role,
             u.IsActive ? "Active" : "Deactivated",
-            DateTimeOffset.UtcNow)).ToList();
+            DateTime.UtcNow)).ToList();
     }
 }

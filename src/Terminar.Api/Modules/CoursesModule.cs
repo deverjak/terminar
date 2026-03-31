@@ -14,7 +14,7 @@ public static class CoursesModule
 {
     public static IEndpointRouteBuilder MapCoursesEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/courses")
+        var group = app.MapGroup("/api/v1/courses")
             .RequireAuthorization("StaffOrAdmin")
             .WithTags("Courses");
 
@@ -97,7 +97,7 @@ public static class CoursesModule
     }
 }
 
-public sealed record SessionInputRequest(DateTimeOffset ScheduledAt, int DurationMinutes, string? Location);
+public sealed record SessionInputRequest(DateTime ScheduledAt, int DurationMinutes, string? Location);
 
 public sealed record CreateCourseRequest(
     string Title,

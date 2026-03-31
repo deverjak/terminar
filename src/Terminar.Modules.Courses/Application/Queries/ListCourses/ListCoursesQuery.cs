@@ -12,6 +12,6 @@ public sealed record CourseListItem(
     int Capacity,
     CourseStatus Status,
     int SessionCount,
-    DateTimeOffset? FirstSessionAt);
+    DateTime? FirstSessionAt);
 
 public sealed record ListCoursesQuery(Guid TenantId) : IRequest<List<CourseListItem>>;

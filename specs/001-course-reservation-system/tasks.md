@@ -22,19 +22,19 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Purpose**: Create solution, projects, and wire Aspire orchestration.
 
-- [ ] T001 Create solution file `Terminar.sln` at repo root
-- [ ] T002 Create Aspire AppHost project via `dotnet new aspire-apphost -n Terminar.AppHost --output src/Terminar.AppHost`
-- [ ] T003 Create Aspire ServiceDefaults project via `dotnet new aspire-servicedefaults -n Terminar.ServiceDefaults --output src/Terminar.ServiceDefaults`
-- [ ] T004 [P] Create API project via `dotnet new web -n Terminar.Api --output src/Terminar.Api`
-- [ ] T005 [P] Create SharedKernel project via `dotnet new classlib -n Terminar.SharedKernel --output src/Terminar.SharedKernel`
-- [ ] T006 [P] Create Tenants module project via `dotnet new classlib -n Terminar.Modules.Tenants --output src/Terminar.Modules.Tenants`
-- [ ] T007 [P] Create Identity module project via `dotnet new classlib -n Terminar.Modules.Identity --output src/Terminar.Modules.Identity`
-- [ ] T008 [P] Create Courses module project via `dotnet new classlib -n Terminar.Modules.Courses --output src/Terminar.Modules.Courses`
-- [ ] T009 [P] Create Registrations module project via `dotnet new classlib -n Terminar.Modules.Registrations --output src/Terminar.Modules.Registrations`
-- [ ] T010 [P] Create test projects via `dotnet new xunit` for `tests/Terminar.Modules.Courses.Tests`, `tests/Terminar.Modules.Registrations.Tests`, `tests/Terminar.Api.IntegrationTests`
-- [ ] T011 Add all projects to `Terminar.sln` and configure project references: all modules → SharedKernel; Api → all modules; AppHost → Api; test projects → their respective modules
-- [ ] T012 Add NuGet packages to each project: `MediatR` (12.x), `FluentValidation` (12.x), `Npgsql.EntityFrameworkCore.PostgreSQL` (10.x), `Aspire.Npgsql.EntityFrameworkCore.PostgreSQL` to modules, `StronglyTypedId` (2.x) to SharedKernel and modules, `Microsoft.AspNetCore.Identity.EntityFrameworkCore` to Identity module
-- [ ] T013 Configure Aspire AppHost to declare PostgreSQL resource with data volume and reference API project in `src/Terminar.AppHost/Program.cs`
+- [x] T001 Create solution file `Terminar.sln` at repo root
+- [x] T002 Create Aspire AppHost project via `dotnet new aspire-apphost -n Terminar.AppHost --output src/Terminar.AppHost`
+- [x] T003 Create Aspire ServiceDefaults project via `dotnet new aspire-servicedefaults -n Terminar.ServiceDefaults --output src/Terminar.ServiceDefaults`
+- [x] T004 [P] Create API project via `dotnet new web -n Terminar.Api --output src/Terminar.Api`
+- [x] T005 [P] Create SharedKernel project via `dotnet new classlib -n Terminar.SharedKernel --output src/Terminar.SharedKernel`
+- [x] T006 [P] Create Tenants module project via `dotnet new classlib -n Terminar.Modules.Tenants --output src/Terminar.Modules.Tenants`
+- [x] T007 [P] Create Identity module project via `dotnet new classlib -n Terminar.Modules.Identity --output src/Terminar.Modules.Identity`
+- [x] T008 [P] Create Courses module project via `dotnet new classlib -n Terminar.Modules.Courses --output src/Terminar.Modules.Courses`
+- [x] T009 [P] Create Registrations module project via `dotnet new classlib -n Terminar.Modules.Registrations --output src/Terminar.Modules.Registrations`
+- [x] T010 [P] Create test projects via `dotnet new xunit` for `tests/Terminar.Modules.Courses.Tests`, `tests/Terminar.Modules.Registrations.Tests`, `tests/Terminar.Api.IntegrationTests`
+- [x] T011 Add all projects to `Terminar.sln` and configure project references: all modules → SharedKernel; Api → all modules; AppHost → Api; test projects → their respective modules
+- [x] T012 Add NuGet packages to each project: `MediatR` (12.x), `FluentValidation` (12.x), `Npgsql.EntityFrameworkCore.PostgreSQL` (10.x), `Aspire.Npgsql.EntityFrameworkCore.PostgreSQL` to modules, `StronglyTypedId` (2.x) to SharedKernel and modules, `Microsoft.AspNetCore.Identity.EntityFrameworkCore` to Identity module
+- [x] T013 Configure Aspire AppHost to declare PostgreSQL resource with data volume and reference API project in `src/Terminar.AppHost/Program.cs`
 
 **Checkpoint**: `dotnet build` succeeds with no errors across the solution.
 
@@ -48,55 +48,55 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 ### SharedKernel Base Classes
 
-- [ ] T014 [P] Create `AggregateRoot<TId>` base class with `_domainEvents` collection and `RaiseDomainEvent` / `ClearDomainEvents` methods in `src/Terminar.SharedKernel/AggregateRoot.cs`
-- [ ] T015 [P] Create `Entity<TId>` base class with typed ID and value equality in `src/Terminar.SharedKernel/Entity.cs`
-- [ ] T016 [P] Create `ValueObject` base class with structural equality via `GetEqualityComponents()` in `src/Terminar.SharedKernel/ValueObject.cs`
-- [ ] T017 [P] Create `IDomainEvent` marker interface (implements `MediatR.INotification`) in `src/Terminar.SharedKernel/IDomainEvent.cs`
-- [ ] T018 [P] Create `TenantId` strongly-typed Guid wrapper using StronglyTypedId in `src/Terminar.SharedKernel/ValueObjects/TenantId.cs`
-- [ ] T019 [P] Create `Email` value object with format validation on construction in `src/Terminar.SharedKernel/ValueObjects/Email.cs`
+- [x] T014 [P] Create `AggregateRoot<TId>` base class with `_domainEvents` collection and `RaiseDomainEvent` / `ClearDomainEvents` methods in `src/Terminar.SharedKernel/AggregateRoot.cs`
+- [x] T015 [P] Create `Entity<TId>` base class with typed ID and value equality in `src/Terminar.SharedKernel/Entity.cs`
+- [x] T016 [P] Create `ValueObject` base class with structural equality via `GetEqualityComponents()` in `src/Terminar.SharedKernel/ValueObject.cs`
+- [x] T017 [P] Create `IDomainEvent` marker interface (implements `MediatR.INotification`) in `src/Terminar.SharedKernel/IDomainEvent.cs`
+- [x] T018 [P] Create `TenantId` strongly-typed Guid wrapper using StronglyTypedId in `src/Terminar.SharedKernel/ValueObjects/TenantId.cs`
+- [x] T019 [P] Create `Email` value object with format validation on construction in `src/Terminar.SharedKernel/ValueObjects/Email.cs`
 
 ### API Pipeline & Infrastructure
 
-- [ ] T020 [P] Create `ValidationBehavior<TRequest, TResponse>` MediatR pipeline behavior that runs all FluentValidation validators and throws `ValidationException` on failure in `src/Terminar.Api/Pipeline/ValidationBehavior.cs`
-- [ ] T021 [P] Create `LoggingBehavior<TRequest, TResponse>` MediatR pipeline behavior that logs request name and elapsed time in `src/Terminar.Api/Pipeline/LoggingBehavior.cs`
-- [ ] T022 [P] Create `ExceptionHandlingMiddleware` that maps domain exceptions (`ValidationException`, `NotFoundException`, `ConflictException`) to RFC 7807 problem details responses in `src/Terminar.Api/Middleware/ExceptionHandlingMiddleware.cs`
-- [ ] T023 [P] Create `ITenantContext` interface with `TenantId` property and scoped `TenantContext` implementation in `src/Terminar.Api/Middleware/TenantContext.cs`
-- [ ] T024 Create `TenantResolutionMiddleware` that resolves tenant from JWT `tenant_id` claim (authenticated) or `X-Tenant-Id` header (public), validates it exists, and sets `ITenantContext` in `src/Terminar.Api/Middleware/TenantResolutionMiddleware.cs`
-- [ ] T025 Configure `Program.cs`: register MediatR (all module assemblies), FluentValidation, pipeline behaviors, middleware, JWT Bearer auth, problem details, Aspire service defaults, and auto-migration hosted service in `src/Terminar.Api/Program.cs`
-- [ ] T026 [P] Create `DatabaseMigrationService` hosted service that applies EF Core migrations for all four module DbContexts on startup in `src/Terminar.Api/Infrastructure/DatabaseMigrationService.cs`
+- [x] T020 [P] Create `ValidationBehavior<TRequest, TResponse>` MediatR pipeline behavior that runs all FluentValidation validators and throws `ValidationException` on failure in `src/Terminar.Api/Pipeline/ValidationBehavior.cs`
+- [x] T021 [P] Create `LoggingBehavior<TRequest, TResponse>` MediatR pipeline behavior that logs request name and elapsed time in `src/Terminar.Api/Pipeline/LoggingBehavior.cs`
+- [x] T022 [P] Create `ExceptionHandlingMiddleware` that maps domain exceptions (`ValidationException`, `NotFoundException`, `ConflictException`) to RFC 7807 problem details responses in `src/Terminar.Api/Middleware/ExceptionHandlingMiddleware.cs`
+- [x] T023 [P] Create `ITenantContext` interface with `TenantId` property and scoped `TenantContext` implementation in `src/Terminar.Api/Middleware/TenantContext.cs`
+- [x] T024 Create `TenantResolutionMiddleware` that resolves tenant from JWT `tenant_id` claim (authenticated) or `X-Tenant-Id` header (public), validates it exists, and sets `ITenantContext` in `src/Terminar.Api/Middleware/TenantResolutionMiddleware.cs`
+- [x] T025 Configure `Program.cs`: register MediatR (all module assemblies), FluentValidation, pipeline behaviors, middleware, JWT Bearer auth, problem details, Aspire service defaults, and auto-migration hosted service in `src/Terminar.Api/Program.cs`
+- [x] T026 [P] Create `DatabaseMigrationService` hosted service that applies EF Core migrations for all four module DbContexts on startup in `src/Terminar.Api/Infrastructure/DatabaseMigrationService.cs`
 
 ### Tenants Module
 
-- [ ] T027 [P] Create `Tenant` aggregate root with fields: `TenantId`, `Name`, `Slug`, `DefaultLanguageCode`, `Status`, `CreatedAt`; enforce slug format invariant in `src/Terminar.Modules.Tenants/Domain/Tenant.cs`
-- [ ] T028 [P] Create `TenantStatus` enum (`Active`, `Suspended`) in `src/Terminar.Modules.Tenants/Domain/TenantStatus.cs`
-- [ ] T029 [P] Create `TenantCreated` domain event in `src/Terminar.Modules.Tenants/Domain/Events/TenantCreated.cs`
-- [ ] T030 [P] Create `ITenantRepository` interface with `GetByIdAsync`, `GetBySlugAsync`, `AddAsync`, `ExistsAsync` in `src/Terminar.Modules.Tenants/Domain/Repositories/ITenantRepository.cs`
-- [ ] T031 Create `CreateTenantCommand` record, `CreateTenantCommandValidator` (validates name, slug uniqueness, language code), and `CreateTenantCommandHandler` (creates tenant + initial Admin StaffUser via cross-module command) in `src/Terminar.Modules.Tenants/Application/Commands/CreateTenant/`
-- [ ] T032 [P] Create `GetTenantQuery` record and `GetTenantQueryHandler` in `src/Terminar.Modules.Tenants/Application/Queries/GetTenant/`
-- [ ] T033 Create `TenantsDbContext` with `tenants` schema, entity configurations for `Tenant`, and `SaveChangesAsync` override that dispatches domain events via `IMediator` in `src/Terminar.Modules.Tenants/Infrastructure/TenantsDbContext.cs`
-- [ ] T034 Create `TenantRepository` implementing `ITenantRepository` using `TenantsDbContext` in `src/Terminar.Modules.Tenants/Infrastructure/Repositories/TenantRepository.cs`
-- [ ] T035 Create `TenantsModule` static class with `AddTenantsModule(IServiceCollection)` extension registering DbContext, repository, and MediatR handlers in `src/Terminar.Modules.Tenants/Infrastructure/TenantsModule.cs`
-- [ ] T036 Add initial EF Core migration for Tenants module (`tenants` schema, `tenants.tenants` table) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Tenants --startup-project src/Terminar.Api --context TenantsDbContext`
-- [ ] T037 Register tenant API routes (`POST /api/v1/tenants`, `GET /api/v1/tenants/{tenantId}`) with `SystemAdmin` authorization policy in `src/Terminar.Api/Modules/TenantsModule.cs`
+- [x] T027 [P] Create `Tenant` aggregate root with fields: `TenantId`, `Name`, `Slug`, `DefaultLanguageCode`, `Status`, `CreatedAt`; enforce slug format invariant in `src/Terminar.Modules.Tenants/Domain/Tenant.cs`
+- [x] T028 [P] Create `TenantStatus` enum (`Active`, `Suspended`) in `src/Terminar.Modules.Tenants/Domain/TenantStatus.cs`
+- [x] T029 [P] Create `TenantCreated` domain event in `src/Terminar.Modules.Tenants/Domain/Events/TenantCreated.cs`
+- [x] T030 [P] Create `ITenantRepository` interface with `GetByIdAsync`, `GetBySlugAsync`, `AddAsync`, `ExistsAsync` in `src/Terminar.Modules.Tenants/Domain/Repositories/ITenantRepository.cs`
+- [x] T031 Create `CreateTenantCommand` record, `CreateTenantCommandValidator` (validates name, slug uniqueness, language code), and `CreateTenantCommandHandler` (creates tenant + initial Admin StaffUser via cross-module command) in `src/Terminar.Modules.Tenants/Application/Commands/CreateTenant/`
+- [x] T032 [P] Create `GetTenantQuery` record and `GetTenantQueryHandler` in `src/Terminar.Modules.Tenants/Application/Queries/GetTenant/`
+- [x] T033 Create `TenantsDbContext` with `tenants` schema, entity configurations for `Tenant`, and `SaveChangesAsync` override that dispatches domain events via `IMediator` in `src/Terminar.Modules.Tenants/Infrastructure/TenantsDbContext.cs`
+- [x] T034 Create `TenantRepository` implementing `ITenantRepository` using `TenantsDbContext` in `src/Terminar.Modules.Tenants/Infrastructure/Repositories/TenantRepository.cs`
+- [x] T035 Create `TenantsModule` static class with `AddTenantsModule(IServiceCollection)` extension registering DbContext, repository, and MediatR handlers in `src/Terminar.Modules.Tenants/Infrastructure/TenantsModule.cs`
+- [x] T036 Add initial EF Core migration for Tenants module (`tenants` schema, `tenants.tenants` table) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Tenants --startup-project src/Terminar.Api --context TenantsDbContext`
+- [x] T037 Register tenant API routes (`POST /api/v1/tenants`, `GET /api/v1/tenants/{tenantId}`) with `SystemAdmin` authorization policy in `src/Terminar.Api/Modules/TenantsModule.cs`
 
 ### Identity Module
 
-- [ ] T038 [P] Create `StaffUser` aggregate root with fields: `StaffUserId`, `TenantId`, `Username`, `Email` (value object), `Role`, `Status`, `CreatedAt`, `LastLoginAt`; enforce deactivated-cannot-login invariant in `src/Terminar.Modules.Identity/Domain/StaffUser.cs`
-- [ ] T039 [P] Create `StaffRole` enum (`Admin`, `Staff`, `SystemAdmin`) and `StaffUserStatus` enum (`Active`, `Deactivated`) in `src/Terminar.Modules.Identity/Domain/`
-- [ ] T040 [P] Create `StaffUserCreated` domain event in `src/Terminar.Modules.Identity/Domain/Events/StaffUserCreated.cs`
-- [ ] T041 [P] Create `IStaffUserRepository` interface with `GetByIdAsync`, `GetByUsernameAsync`, `FindByTenantAsync`, `AddAsync`, `UpdateAsync` in `src/Terminar.Modules.Identity/Domain/Repositories/IStaffUserRepository.cs`
-- [ ] T042 Create `AppIdentityUser` class extending `IdentityUser` with additional `TenantId` (Guid) and `Role` (string) fields in `src/Terminar.Modules.Identity/Infrastructure/Identity/AppIdentityUser.cs`
-- [ ] T043 Create `AppIdentityDbContext` extending `IdentityDbContext<AppIdentityUser>` using `identity` schema for all ASP.NET Identity tables in `src/Terminar.Modules.Identity/Infrastructure/Identity/AppIdentityDbContext.cs`
-- [ ] T044 Create `StaffUserRepository` that wraps `UserManager<AppIdentityUser>` and maps `AppIdentityUser` ↔ `StaffUser` domain aggregate in `src/Terminar.Modules.Identity/Infrastructure/Persistence/StaffUserRepository.cs`
-- [ ] T045 Create `JwtTokenService` that issues signed JWT (HS256) with claims `sub`, `tenant_id`, `role`, `exp`, `jti`; manages refresh token storage via `UserManager.SetAuthenticationTokenAsync` in `src/Terminar.Modules.Identity/Infrastructure/Services/JwtTokenService.cs`
-- [ ] T046 Create `LoginCommand` record, `LoginCommandValidator`, and `LoginCommandHandler` (verifies password via `SignInManager`, returns JWT + refresh token) in `src/Terminar.Modules.Identity/Application/Auth/Login/`
-- [ ] T047 [P] Create `RefreshTokenCommand` record and `RefreshTokenCommandHandler` (validates + rotates refresh token, issues new JWT) in `src/Terminar.Modules.Identity/Application/Auth/RefreshToken/`
-- [ ] T048 Create `CreateStaffUserCommand` record, `CreateStaffUserCommandValidator` (validates username/email uniqueness per tenant, password complexity), and `CreateStaffUserCommandHandler` (creates via `UserManager.CreateAsync`) in `src/Terminar.Modules.Identity/Application/Commands/CreateStaffUser/`
-- [ ] T049 [P] Create `DeactivateStaffUserCommand` record and `DeactivateStaffUserCommandHandler` (sets status to Deactivated, revokes all refresh tokens) in `src/Terminar.Modules.Identity/Application/Commands/DeactivateStaffUser/`
-- [ ] T050 [P] Create `ListStaffUsersQuery` record and `ListStaffUsersQueryHandler` in `src/Terminar.Modules.Identity/Application/Queries/ListStaffUsers/`
-- [ ] T051 Create `IdentityModule` static class with `AddIdentityModule(IServiceCollection)` extension: registers `AddIdentityCore<AppIdentityUser>`, `AddEntityFrameworkStores<AppIdentityDbContext>`, `AddJwtBearer` with JWT config from `IConfiguration`, `JwtTokenService`, repository, and MediatR handlers in `src/Terminar.Modules.Identity/Infrastructure/IdentityModule.cs`
-- [ ] T052 Add initial EF Core migration for Identity module (`identity` schema, ASP.NET Identity tables) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Identity --startup-project src/Terminar.Api --context AppIdentityDbContext`
-- [ ] T053 Register auth and staff API routes: `POST /api/v1/auth/login`, `POST /api/v1/auth/refresh`, `POST /api/v1/staff`, `GET /api/v1/staff`, `DELETE /api/v1/staff/{staffUserId}` in `src/Terminar.Api/Modules/IdentityModule.cs`
+- [x] T038 [P] Create `StaffUser` aggregate root with fields: `StaffUserId`, `TenantId`, `Username`, `Email` (value object), `Role`, `Status`, `CreatedAt`, `LastLoginAt`; enforce deactivated-cannot-login invariant in `src/Terminar.Modules.Identity/Domain/StaffUser.cs`
+- [x] T039 [P] Create `StaffRole` enum (`Admin`, `Staff`, `SystemAdmin`) and `StaffUserStatus` enum (`Active`, `Deactivated`) in `src/Terminar.Modules.Identity/Domain/`
+- [x] T040 [P] Create `StaffUserCreated` domain event in `src/Terminar.Modules.Identity/Domain/Events/StaffUserCreated.cs`
+- [x] T041 [P] Create `IStaffUserRepository` interface with `GetByIdAsync`, `GetByUsernameAsync`, `FindByTenantAsync`, `AddAsync`, `UpdateAsync` in `src/Terminar.Modules.Identity/Domain/Repositories/IStaffUserRepository.cs`
+- [x] T042 Create `AppIdentityUser` class extending `IdentityUser` with additional `TenantId` (Guid) and `Role` (string) fields in `src/Terminar.Modules.Identity/Infrastructure/Identity/AppIdentityUser.cs`
+- [x] T043 Create `AppIdentityDbContext` extending `IdentityDbContext<AppIdentityUser>` using `identity` schema for all ASP.NET Identity tables in `src/Terminar.Modules.Identity/Infrastructure/Identity/AppIdentityDbContext.cs`
+- [x] T044 Create `StaffUserRepository` that wraps `UserManager<AppIdentityUser>` and maps `AppIdentityUser` ↔ `StaffUser` domain aggregate in `src/Terminar.Modules.Identity/Infrastructure/Persistence/StaffUserRepository.cs`
+- [x] T045 Create `JwtTokenService` that issues signed JWT (HS256) with claims `sub`, `tenant_id`, `role`, `exp`, `jti`; manages refresh token storage via `UserManager.SetAuthenticationTokenAsync` in `src/Terminar.Modules.Identity/Infrastructure/Services/JwtTokenService.cs`
+- [x] T046 Create `LoginCommand` record, `LoginCommandValidator`, and `LoginCommandHandler` (verifies password via `SignInManager`, returns JWT + refresh token) in `src/Terminar.Modules.Identity/Application/Auth/Login/`
+- [x] T047 [P] Create `RefreshTokenCommand` record and `RefreshTokenCommandHandler` (validates + rotates refresh token, issues new JWT) in `src/Terminar.Modules.Identity/Application/Auth/RefreshToken/`
+- [x] T048 Create `CreateStaffUserCommand` record, `CreateStaffUserCommandValidator` (validates username/email uniqueness per tenant, password complexity), and `CreateStaffUserCommandHandler` (creates via `UserManager.CreateAsync`) in `src/Terminar.Modules.Identity/Application/Commands/CreateStaffUser/`
+- [x] T049 [P] Create `DeactivateStaffUserCommand` record and `DeactivateStaffUserCommandHandler` (sets status to Deactivated, revokes all refresh tokens) in `src/Terminar.Modules.Identity/Application/Commands/DeactivateStaffUser/`
+- [x] T050 [P] Create `ListStaffUsersQuery` record and `ListStaffUsersQueryHandler` in `src/Terminar.Modules.Identity/Application/Queries/ListStaffUsers/`
+- [x] T051 Create `IdentityModule` static class with `AddIdentityModule(IServiceCollection)` extension: registers `AddIdentityCore<AppIdentityUser>`, `AddEntityFrameworkStores<AppIdentityDbContext>`, `AddJwtBearer` with JWT config from `IConfiguration`, `JwtTokenService`, repository, and MediatR handlers in `src/Terminar.Modules.Identity/Infrastructure/IdentityModule.cs`
+- [x] T052 Add initial EF Core migration for Identity module (`identity` schema, ASP.NET Identity tables) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Identity --startup-project src/Terminar.Api --context AppIdentityDbContext`
+- [x] T053 Register auth and staff API routes: `POST /api/v1/auth/login`, `POST /api/v1/auth/refresh`, `POST /api/v1/staff`, `GET /api/v1/staff`, `DELETE /api/v1/staff/{staffUserId}` in `src/Terminar.Api/Modules/IdentityModule.cs`
 
 **Checkpoint**: Foundation ready — `dotnet run` from AppHost starts without errors; `POST /api/v1/tenants` and `POST /api/v1/auth/login` return expected responses; tenant resolution middleware resolves tenant from header and JWT claim.
 
@@ -108,24 +108,24 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Independent Test**: Staff logs in, creates a one-time course, and retrieves it by ID with correct session data. No other module needed.
 
-- [ ] T054 [P] [US1] Create `CourseId` and `SessionId` strongly-typed Guid wrappers using StronglyTypedId in `src/Terminar.Modules.Courses/Domain/CourseId.cs` and `src/Terminar.Modules.Courses/Domain/SessionId.cs`
-- [ ] T055 [P] [US1] Create `CourseType` enum (`OneTime`, `MultiSession`), `CourseStatus` enum (`Draft`, `Active`, `Cancelled`, `Completed`), and `RegistrationMode` enum (`Open`, `StaffOnly`) in `src/Terminar.Modules.Courses/Domain/`
-- [ ] T056 [P] [US1] Create `Session` entity with fields: `SessionId`, `ScheduledAt`, `DurationMinutes`, `Location`, `Sequence`; enforce `ScheduledAt` must not be in the past in `src/Terminar.Modules.Courses/Domain/Session.cs`
-- [ ] T057 [US1] Create `Course` aggregate root with fields: `CourseId`, `TenantId`, `Title`, `Description`, `CourseType`, `RegistrationMode`, `Capacity`, `Status`, `Sessions`, `CreatedByStaffId`, `CreatedAt`, `UpdatedAt`; enforce all invariants: OneTime → exactly 1 session, MultiSession → ≥2 sessions, status transition rules, no edit on Cancelled/Completed in `src/Terminar.Modules.Courses/Domain/Course.cs`
-- [ ] T058 [P] [US1] Create domain events `CourseCreated`, `CourseActivated`, `CourseCancelled` in `src/Terminar.Modules.Courses/Domain/Events/`
-- [ ] T059 [P] [US1] Create `ICourseRepository` interface with `GetByIdAsync`, `ListByTenantAsync`, `AddAsync`, `UpdateAsync` in `src/Terminar.Modules.Courses/Domain/Repositories/ICourseRepository.cs`
-- [ ] T060 [P] [US1] Create `ICourseCapacityReader` port interface with `GetCapacityInfoAsync(CourseId, TenantId)` returning capacity and confirmed count in `src/Terminar.Modules.Courses/Application/Ports/ICourseCapacityReader.cs`
-- [ ] T061 [US1] Create `CreateCourseCommand` record, `CreateCourseCommandValidator` (validates title, capacity, session count matches course type, no overlapping session times), and `CreateCourseCommandHandler` (creates Course aggregate, persists, raises event) in `src/Terminar.Modules.Courses/Application/Commands/CreateCourse/`
-- [ ] T062 [P] [US1] Create `UpdateCourseCommand` record, `UpdateCourseCommandValidator`, and `UpdateCourseCommandHandler` (rejects update if Cancelled/Completed) in `src/Terminar.Modules.Courses/Application/Commands/UpdateCourse/`
-- [ ] T063 [P] [US1] Create `CancelCourseCommand` record and `CancelCourseCommandHandler` (transitions status to Cancelled, raises `CourseCancelled` event) in `src/Terminar.Modules.Courses/Application/Commands/CancelCourse/`
-- [ ] T064 [P] [US1] Create `ListCoursesQuery` record (with pagination, status filter) and `ListCoursesQueryHandler` (staff sees all statuses; public sees only Active+Open via query parameter flag) in `src/Terminar.Modules.Courses/Application/Queries/ListCourses/`
-- [ ] T065 [P] [US1] Create `GetCourseQuery` record and `GetCourseQueryHandler` returning full course with sessions in `src/Terminar.Modules.Courses/Application/Queries/GetCourse/`
-- [ ] T066 [US1] Create `CoursesDbContext` with `courses` schema, entity configurations for `Course` and `Session` (owned entity), global `TenantId` query filter, and `SaveChangesAsync` override dispatching domain events in `src/Terminar.Modules.Courses/Infrastructure/CoursesDbContext.cs`
-- [ ] T067 [US1] Create `CourseRepository` implementing `ICourseRepository` using `CoursesDbContext` in `src/Terminar.Modules.Courses/Infrastructure/Repositories/CourseRepository.cs`
-- [ ] T068 [US1] Create `CourseCapacityReader` implementing `ICourseCapacityReader` (queries CoursesDbContext for capacity; queries RegistrationsDbContext via a cross-module read using a registered `IRegistrationCountReader` port) in `src/Terminar.Modules.Courses/Infrastructure/Ports/CourseCapacityReader.cs`
-- [ ] T069 Create `CoursesModule` static class with `AddCoursesModule(IServiceCollection)` registering DbContext (connected to Aspire `terminar-db` resource), repository, capacity reader, and MediatR handlers in `src/Terminar.Modules.Courses/Infrastructure/CoursesModule.cs`
-- [ ] T070 Add initial EF Core migration for Courses module (`courses` schema, `courses.courses` and `courses.sessions` tables) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Courses --startup-project src/Terminar.Api --context CoursesDbContext`
-- [ ] T071 Register course API routes: `POST /api/v1/courses` (Staff/Admin auth), `GET /api/v1/courses` (public + staff), `GET /api/v1/courses/{courseId}` (public + staff), `PUT /api/v1/courses/{courseId}` (Staff/Admin), `POST /api/v1/courses/{courseId}/cancel` (Admin only) in `src/Terminar.Api/Modules/CoursesModule.cs`
+- [x] T054 [P] [US1] Create `CourseId` and `SessionId` strongly-typed Guid wrappers using StronglyTypedId in `src/Terminar.Modules.Courses/Domain/CourseId.cs` and `src/Terminar.Modules.Courses/Domain/SessionId.cs`
+- [x] T055 [P] [US1] Create `CourseType` enum (`OneTime`, `MultiSession`), `CourseStatus` enum (`Draft`, `Active`, `Cancelled`, `Completed`), and `RegistrationMode` enum (`Open`, `StaffOnly`) in `src/Terminar.Modules.Courses/Domain/`
+- [x] T056 [P] [US1] Create `Session` entity with fields: `SessionId`, `ScheduledAt`, `DurationMinutes`, `Location`, `Sequence`; enforce `ScheduledAt` must not be in the past in `src/Terminar.Modules.Courses/Domain/Session.cs`
+- [x] T057 [US1] Create `Course` aggregate root with fields: `CourseId`, `TenantId`, `Title`, `Description`, `CourseType`, `RegistrationMode`, `Capacity`, `Status`, `Sessions`, `CreatedByStaffId`, `CreatedAt`, `UpdatedAt`; enforce all invariants: OneTime → exactly 1 session, MultiSession → ≥2 sessions, status transition rules, no edit on Cancelled/Completed in `src/Terminar.Modules.Courses/Domain/Course.cs`
+- [x] T058 [P] [US1] Create domain events `CourseCreated`, `CourseActivated`, `CourseCancelled` in `src/Terminar.Modules.Courses/Domain/Events/`
+- [x] T059 [P] [US1] Create `ICourseRepository` interface with `GetByIdAsync`, `ListByTenantAsync`, `AddAsync`, `UpdateAsync` in `src/Terminar.Modules.Courses/Domain/Repositories/ICourseRepository.cs`
+- [x] T060 [P] [US1] Create `ICourseCapacityReader` port interface with `GetCapacityInfoAsync(CourseId, TenantId)` returning capacity and confirmed count in `src/Terminar.Modules.Courses/Application/Ports/ICourseCapacityReader.cs`
+- [x] T061 [US1] Create `CreateCourseCommand` record, `CreateCourseCommandValidator` (validates title, capacity, session count matches course type, no overlapping session times), and `CreateCourseCommandHandler` (creates Course aggregate, persists, raises event) in `src/Terminar.Modules.Courses/Application/Commands/CreateCourse/`
+- [x] T062 [P] [US1] Create `UpdateCourseCommand` record, `UpdateCourseCommandValidator`, and `UpdateCourseCommandHandler` (rejects update if Cancelled/Completed) in `src/Terminar.Modules.Courses/Application/Commands/UpdateCourse/`
+- [x] T063 [P] [US1] Create `CancelCourseCommand` record and `CancelCourseCommandHandler` (transitions status to Cancelled, raises `CourseCancelled` event) in `src/Terminar.Modules.Courses/Application/Commands/CancelCourse/`
+- [x] T064 [P] [US1] Create `ListCoursesQuery` record (with pagination, status filter) and `ListCoursesQueryHandler` (staff sees all statuses; public sees only Active+Open via query parameter flag) in `src/Terminar.Modules.Courses/Application/Queries/ListCourses/`
+- [x] T065 [P] [US1] Create `GetCourseQuery` record and `GetCourseQueryHandler` returning full course with sessions in `src/Terminar.Modules.Courses/Application/Queries/GetCourse/`
+- [x] T066 [US1] Create `CoursesDbContext` with `courses` schema, entity configurations for `Course` and `Session` (owned entity), global `TenantId` query filter, and `SaveChangesAsync` override dispatching domain events in `src/Terminar.Modules.Courses/Infrastructure/CoursesDbContext.cs`
+- [x] T067 [US1] Create `CourseRepository` implementing `ICourseRepository` using `CoursesDbContext` in `src/Terminar.Modules.Courses/Infrastructure/Repositories/CourseRepository.cs`
+- [x] T068 [US1] Create `CourseCapacityReader` implementing `ICourseCapacityReader` (queries CoursesDbContext for capacity; queries RegistrationsDbContext via a cross-module read using a registered `IRegistrationCountReader` port) in `src/Terminar.Modules.Courses/Infrastructure/Ports/CourseCapacityReader.cs`
+- [x] T069 Create `CoursesModule` static class with `AddCoursesModule(IServiceCollection)` registering DbContext (connected to Aspire `terminar-db` resource), repository, capacity reader, and MediatR handlers in `src/Terminar.Modules.Courses/Infrastructure/CoursesModule.cs`
+- [x] T070 Add initial EF Core migration for Courses module (`courses` schema, `courses.courses` and `courses.sessions` tables) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Courses --startup-project src/Terminar.Api --context CoursesDbContext`
+- [x] T071 Register course API routes: `POST /api/v1/courses` (Staff/Admin auth), `GET /api/v1/courses` (public + staff), `GET /api/v1/courses/{courseId}` (public + staff), `PUT /api/v1/courses/{courseId}` (Staff/Admin), `POST /api/v1/courses/{courseId}/cancel` (Admin only) in `src/Terminar.Api/Modules/CoursesModule.cs`
 
 **Checkpoint**: Staff can create both OneTime and MultiSession courses via the API. `GET /api/v1/courses` returns the course list. Creating a OneTime course with 2 sessions returns `422`. Cancelling an already-cancelled course returns `409`.
 
@@ -137,19 +137,19 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Independent Test**: Public user sends `POST /courses/{id}/registrations` with name + email to an open course → receives `201`. Second identical request returns `409`. Request to a full course returns `422`.
 
-- [ ] T072 [P] [US2] Create `RegistrationId` strongly-typed Guid wrapper using StronglyTypedId in `src/Terminar.Modules.Registrations/Domain/RegistrationId.cs`
-- [ ] T073 [P] [US2] Create `RegistrationStatus` enum (`Confirmed`, `Cancelled`) and `RegistrationSource` enum (`SelfService`, `StaffAdded`) in `src/Terminar.Modules.Registrations/Domain/`
-- [ ] T074 [P] [US2] Create `RegistrationCreated` and `RegistrationCancelled` domain events in `src/Terminar.Modules.Registrations/Domain/Events/`
-- [ ] T075 [P] [US2] Create `IRegistrationRepository` interface with `GetByIdAsync`, `GetByEmailAndCourseAsync`, `CountConfirmedByCourseAsync`, `AddAsync`, `UpdateAsync` in `src/Terminar.Modules.Registrations/Domain/Repositories/IRegistrationRepository.cs`
-- [ ] T076 [P] [US2] Create `IRegistrationCountReader` port interface (used by Courses module's `CourseCapacityReader`) with `CountConfirmedAsync(CourseId, TenantId)` in `src/Terminar.Modules.Registrations/Application/Ports/IRegistrationCountReader.cs`
-- [ ] T077 [US2] Create `RegistrationCapacityChecker` domain service that uses `ICourseCapacityReader` to check if registration is allowed (throws `CourseFullException` if confirmed count >= capacity) in `src/Terminar.Modules.Registrations/Domain/Services/RegistrationCapacityChecker.cs`
-- [ ] T078 [US2] Create `Registration` aggregate root with all fields from data-model.md; enforce invariants: no duplicate confirmed registration for same email+course, no registration on Cancelled/Completed course, no cancel after all sessions ended; generate `CancellationToken` (random Guid) on creation in `src/Terminar.Modules.Registrations/Domain/Registration.cs`
-- [ ] T079 [US2] Create `CreateRegistrationCommand` record (courseId, participantName, participantEmail, optional registeredByStaffId), `CreateRegistrationCommandValidator`, and `CreateRegistrationCommandHandler` (checks capacity via `RegistrationCapacityChecker`, creates aggregate, persists, raises `RegistrationCreated`) in `src/Terminar.Modules.Registrations/Application/Commands/CreateRegistration/`
-- [ ] T080 [US2] Create `RegistrationsDbContext` with `registrations` schema, entity configuration for `Registration`, global `TenantId` query filter, and `SaveChangesAsync` override dispatching domain events in `src/Terminar.Modules.Registrations/Infrastructure/RegistrationsDbContext.cs`
-- [ ] T081 [US2] Create `RegistrationRepository` implementing `IRegistrationRepository` and `IRegistrationCountReader` using `RegistrationsDbContext` in `src/Terminar.Modules.Registrations/Infrastructure/Repositories/RegistrationRepository.cs`
-- [ ] T082 Create `RegistrationsModule` static class with `AddRegistrationsModule(IServiceCollection)` registering DbContext, repository (as both `IRegistrationRepository` and `IRegistrationCountReader`), domain service, and MediatR handlers in `src/Terminar.Modules.Registrations/Infrastructure/RegistrationsModule.cs`
-- [ ] T083 Add initial EF Core migration for Registrations module (`registrations` schema, `registrations.registrations` table) via `dotnet ef migrations add InitialCreate --project src/Terminar.Modules.Registrations --startup-project src/Terminar.Api --context RegistrationsDbContext`
-- [ ] T084 Register public self-registration route `POST /api/v1/courses/{courseId}/registrations` (no auth required, reads tenant from `X-Tenant-Id` header, enforces `Open` registration mode) in `src/Terminar.Api/Modules/RegistrationsModule.cs`
+- [x] T072 [P] [US2] Create `RegistrationId` strongly-typed Guid wrapper using StronglyTypedId in `src/Terminar.Modules.Registrations/Domain/RegistrationId.cs`
+- [x] T073 [P] [US2] Create `RegistrationStatus` enum (`Confirmed`, `Cancelled`) and `RegistrationSource` enum (`SelfService`, `StaffAdded`) in `src/Terminar.Modules.Registrations/Domain/`
+- [x] T074 [P] [US2] Create `RegistrationCreated` and `RegistrationCancelled` domain events in `src/Terminar.Modules.Registrations/Domain/Events/`
+- [x] T075 [P] [US2] Create `IRegistrationRepository` interface with `GetByIdAsync`, `GetByEmailAndCourseAsync`, `CountConfirmedByCourseAsync`, `AddAsync`, `UpdateAsync` in `src/Terminar.Modules.Registrations/Domain/Repositories/IRegistrationRepository.cs`
+- [x] T076 [P] [US2] Create `IRegistrationCountReader` port interface (used by Courses module's `CourseCapacityReader`) with `CountConfirmedAsync(CourseId, TenantId)` in `src/Terminar.Modules.Courses/Application/Ports/IRegistrationCountReader.cs`
+- [x] T077 [US2] Create `RegistrationCapacityChecker` domain service that uses `ICourseCapacityReader` to check if registration is allowed (throws `UnprocessableException` if confirmed count >= capacity or course Cancelled/Completed) in `src/Terminar.Modules.Registrations/Domain/Services/RegistrationCapacityChecker.cs`
+- [x] T078 [US2] Create `Registration` aggregate root with all fields from data-model.md; enforce invariants: no duplicate confirmed registration for same email+course, no registration on Cancelled/Completed course, no cancel after all sessions ended; generate `SelfCancellationToken` (random Guid) on creation in `src/Terminar.Modules.Registrations/Domain/Registration.cs`
+- [x] T079 [US2] Create `CreateRegistrationCommand` record (courseId, participantName, participantEmail, optional registeredByStaffId), `CreateRegistrationCommandValidator`, and `CreateRegistrationCommandHandler` (checks capacity via `RegistrationCapacityChecker`, creates aggregate, persists, raises `RegistrationCreated`) in `src/Terminar.Modules.Registrations/Application/Commands/CreateRegistration/`
+- [x] T080 [US2] Create `RegistrationsDbContext` with `registrations` schema, entity configuration for `Registration`, global `TenantId` query filter, and `SaveChangesAsync` override dispatching domain events in `src/Terminar.Modules.Registrations/Infrastructure/RegistrationsDbContext.cs`
+- [x] T081 [US2] Create `RegistrationRepository` implementing `IRegistrationRepository` and `IRegistrationCountReader` using `RegistrationsDbContext` in `src/Terminar.Modules.Registrations/Infrastructure/Repositories/RegistrationRepository.cs`
+- [x] T082 Create `RegistrationsModule` static class with `AddRegistrationsModule(IServiceCollection)` registering DbContext, repository (as both `IRegistrationRepository` and `IRegistrationCountReader`), domain service, and MediatR handlers in `src/Terminar.Modules.Registrations/Infrastructure/RegistrationsModule.cs`
+- [x] T083 Add initial EF Core migration for Registrations module (`registrations` schema, `registrations.Registrations` table) — migration updated in-place as table was empty scaffold
+- [x] T084 Register public self-registration route `POST /api/v1/courses/{courseId}/registrations` (no auth required, reads tenant from `X-Tenant-Id` header, enforces `Open` registration mode) in `src/Terminar.Api/Modules/RegistrationsModule.cs`
 
 **Checkpoint**: Public user registers for an open course. Duplicate registration returns `409`. Registration on a StaffOnly course returns `403`. Course at capacity returns `422`.
 
@@ -161,8 +161,8 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Independent Test**: Authenticated staff sends `POST /courses/{id}/registrations` to a `StaffOnly` course → participant appears on roster. Same as US2 endpoint but with Bearer token and no registration mode restriction.
 
-- [ ] T085 [US3] Extend `CreateRegistrationCommandHandler` to detect caller role from command context: if `RegisteredByStaffId` is provided, set `RegistrationSource.StaffAdded` and bypass `Open` mode restriction; if registering past capacity, return a `409` warning response (no silent override) in `src/Terminar.Modules.Registrations/Application/Commands/CreateRegistration/CreateRegistrationCommandHandler.cs`
-- [ ] T086 [US3] Add authenticated staff registration route to the same `POST /api/v1/courses/{courseId}/registrations` endpoint: require `Staff` or `Admin` JWT, pass `RegisteredByStaffId` from JWT `sub` claim to the command in `src/Terminar.Api/Modules/RegistrationsModule.cs`
+- [x] T085 [US3] Extend `CreateRegistrationCommandHandler` to detect caller role from command context: if `RegisteredByStaffId` is provided, set `RegistrationSource.StaffAdded` and bypass `Open` mode restriction; if registering past capacity, return a `409` warning response (no silent override) in `src/Terminar.Modules.Registrations/Application/Commands/CreateRegistration/CreateRegistrationCommandHandler.cs`
+- [x] T086 [US3] Add authenticated staff registration route to the same `POST /api/v1/courses/{courseId}/registrations` endpoint: require `Staff` or `Admin` JWT, pass `RegisteredByStaffId` from JWT `sub` claim to the command in `src/Terminar.Api/Modules/RegistrationsModule.cs`
 
 **Checkpoint**: Staff registers a participant on a `StaffOnly` course → `201`. Public user attempting the same → `403`. Staff registering duplicate email → `409`.
 
@@ -174,8 +174,8 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Independent Test**: Staff sends `GET /courses/{id}/registrations` with JWT → receives paginated roster with all confirmed registrations. Unauthenticated request → `401`.
 
-- [ ] T087 [P] [US5] Create `GetCourseRosterQuery` record (courseId, tenantId, status filter, page, pageSize) and `GetCourseRosterQueryHandler` returning paginated `RegistrationDto` list in `src/Terminar.Modules.Registrations/Application/Queries/GetCourseRoster/`
-- [ ] T088 [US5] Register roster route `GET /api/v1/courses/{courseId}/registrations` (requires `Staff` or `Admin` JWT, supports `?status=Confirmed|Cancelled&page=1&page_size=20`) in `src/Terminar.Api/Modules/RegistrationsModule.cs`
+- [x] T087 [P] [US5] Create `GetCourseRosterQuery` record (courseId, tenantId, status filter, page, pageSize) and `GetCourseRosterQueryHandler` returning paginated `RegistrationDto` list in `src/Terminar.Modules.Registrations/Application/Queries/GetCourseRoster/`
+- [x] T088 [US5] Register roster route `GET /api/v1/courses/{courseId}/registrations` (requires `Staff` or `Admin` JWT, supports `?status=Confirmed|Cancelled&page=1&page_size=20`) in `src/Terminar.Api/Modules/RegistrationsModule.cs`
 
 **Checkpoint**: Staff retrieves roster with correct pagination. Filtering by `?status=Cancelled` shows only cancelled registrations. Total count in response matches database.
 
@@ -187,11 +187,11 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Independent Test**: Participant uses cancellation token from registration response to call `DELETE /courses/{id}/registrations/{regId}?token=<token>` → `204`. Second call with same token → `409`.
 
-- [ ] T089 [P] [US4] Extend `Registration` aggregate to include `CancellationToken` (Guid, generated on creation) and `Cancel(DateTimeOffset now, IEnumerable<Session> sessions)` method that validates cancellation window (all sessions must not have ended) and sets status to Cancelled in `src/Terminar.Modules.Registrations/Domain/Registration.cs`
-- [ ] T090 [P] [US4] Add `CancellationToken` to `RegistrationsDbContext` entity configuration and create EF Core migration `AddCancellationToken` in `src/Terminar.Modules.Registrations/Infrastructure/`
-- [ ] T091 [US4] Create `CancelRegistrationCommand` record (registrationId, courseId, tenantId, cancellationToken optional, staffUserId optional), `CancelRegistrationCommandValidator`, and `CancelRegistrationCommandHandler` (validates: token matches OR caller is staff; calls `Registration.Cancel()`; raises `RegistrationCancelled`) in `src/Terminar.Modules.Registrations/Application/Commands/CancelRegistration/`
-- [ ] T092 [US4] Extend `CreateRegistrationCommand` response DTO to include `cancellation_token` field (returned once at registration, never again) in `src/Terminar.Modules.Registrations/Application/Commands/CreateRegistration/`
-- [ ] T093 [US4] Register cancellation route `DELETE /api/v1/courses/{courseId}/registrations/{registrationId}` (public with `?token=<token>` OR Staff/Admin JWT) in `src/Terminar.Api/Modules/RegistrationsModule.cs`
+- [x] T089 [P] [US4] Extend `Registration` aggregate to include `SelfCancellationToken` (Guid, generated on creation) and `Cancel(DateTimeOffset now, DateTimeOffset? lastSessionEndsAt)` method that validates cancellation window and sets status to Cancelled in `src/Terminar.Modules.Registrations/Domain/Registration.cs`
+- [x] T090 [P] [US4] `SelfCancellationToken` included in InitialCreate migration and model snapshot; no separate migration needed
+- [x] T091 [US4] Create `CancelRegistrationCommand` record, `CancelRegistrationCommandValidator`, and `CancelRegistrationCommandHandler` (validates: token matches OR caller is staff; calls `Registration.Cancel()`; raises `RegistrationCancelled`) in `src/Terminar.Modules.Registrations/Application/Commands/CancelRegistration/`
+- [x] T092 [US4] `CreateRegistrationResult` includes `SelfCancellationToken` field (returned once at registration) in `src/Terminar.Modules.Registrations/Application/Commands/CreateRegistration/`
+- [x] T093 [US4] Register cancellation route `DELETE /api/v1/courses/{courseId}/registrations/{registrationId}` (public with `?token=<token>` OR Staff/Admin JWT) in `src/Terminar.Api/Modules/RegistrationsModule.cs`
 
 **Checkpoint**: Self-cancellation with valid token → `204`. Cancellation with wrong token → `403`. Staff cancellation with JWT → `204`. Cancellation of already-cancelled registration → `409`. Cancellation after all sessions ended → `422`.
 
@@ -201,9 +201,9 @@ description: "Task list for Course Reservation System (Termínář) — Feature 
 
 **Purpose**: Finalize shared concerns affecting all user stories.
 
-- [ ] T094 [P] Create `IEmailNotificationService` interface with `SendRegistrationConfirmationAsync` and `SendRegistrationCancellationAsync` in `src/Terminar.Api/Notifications/IEmailNotificationService.cs`
-- [ ] T095 [P] Create `StubEmailNotificationService` (no-op implementation, logs to console) and `RegistrationCreatedEmailHandler` (`INotificationHandler<RegistrationCreated>`) in `src/Terminar.Api/Notifications/`
-- [ ] T096 [P] Add health check endpoints for each module DbContext via `AddNpgsqlHealthCheck` in `src/Terminar.Api/Program.cs`
+- [x] T094 [P] Create `IEmailNotificationService` interface with `SendRegistrationConfirmationAsync` and `SendRegistrationCancellationAsync` in `src/Terminar.Api/Notifications/IEmailNotificationService.cs`
+- [x] T095 [P] Create `StubEmailNotificationService` (no-op implementation, logs to console) and `RegistrationCreatedEmailHandler` (`INotificationHandler<RegistrationCreated>`) in `src/Terminar.Api/Notifications/`
+- [x] T096 [P] Health check endpoints provided by Aspire `AddServiceDefaults()` + `MapDefaultEndpoints()` via `/health` and `/alive`
 - [ ] T097 Validate `quickstart.md` end-to-end walkthrough against running system: create tenant → login → create course → self-register → view roster → cancel registration
 
 ---

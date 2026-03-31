@@ -28,8 +28,8 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                     Capacity = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     CreatedByStaffId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ScheduledAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    ScheduledAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DurationMinutes = table.Column<int>(type: "integer", nullable: false),
                     Location = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     Sequence = table.Column<int>(type: "integer", nullable: false),

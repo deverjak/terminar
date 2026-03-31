@@ -6,10 +6,10 @@ namespace Terminar.Modules.Courses.Application.Queries.GetCourse;
 public sealed record SessionDto(
     Guid Id,
     int Sequence,
-    DateTimeOffset ScheduledAt,
+    DateTime ScheduledAt,
     int DurationMinutes,
     string? Location,
-    DateTimeOffset EndsAt);
+    DateTime EndsAt);
 
 public sealed record CourseDetail(
     Guid Id,
@@ -20,8 +20,8 @@ public sealed record CourseDetail(
     int Capacity,
     CourseStatus Status,
     Guid CreatedByStaffId,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt,
+    DateTime CreatedAt,
+    DateTime UpdatedAt,
     List<SessionDto> Sessions);
 
 public sealed record GetCourseQuery(Guid CourseId, Guid TenantId) : IRequest<CourseDetail>;

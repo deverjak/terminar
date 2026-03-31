@@ -11,4 +11,4 @@ public sealed record GetTenantResult(
     string Slug,
     string DefaultLanguageCode,
     string Status,
-    DateTimeOffset CreatedAt);
+    DateTime CreatedAt);

@@ -10,7 +10,7 @@ public sealed class Tenant : AggregateRoot<TenantId>
     public string Slug { get; private set; } = string.Empty;
     public string DefaultLanguageCode { get; private set; } = string.Empty;
     public TenantStatus Status { get; private set; }
-    public DateTimeOffset CreatedAt { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
     private Tenant() { }
 
@@ -30,7 +30,7 @@ public sealed class Tenant : AggregateRoot<TenantId>
             Slug = slug.Trim().ToLowerInvariant(),
             DefaultLanguageCode = defaultLanguageCode.Trim().ToLowerInvariant(),
             Status = TenantStatus.Active,
-            CreatedAt = DateTimeOffset.UtcNow
+            CreatedAt = DateTime.UtcNow
         };
 
         tenant.RaiseDomainEvent(new TenantCreated(
