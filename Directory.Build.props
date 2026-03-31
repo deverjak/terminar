@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Override NuGet config to avoid VS fallback sources that don't exist on this machine -->
+    <RestoreConfigFile>$(MSBuildThisFileDirectory)NuGet.Config</RestoreConfigFile>
+  </PropertyGroup>
+</Project>
