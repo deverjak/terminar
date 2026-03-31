@@ -1,0 +1,62 @@
+## .NET / C#
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ASP.NET Core
+appsettings.Development.json
+appsettings.Local.json
+
+## .NET Aspire
+.aspire/
+
+## User secrets (local dev)
+secrets.json
+**/Properties/launchSettings.json
+
+## EF Core migrations (keep source, ignore generated)
+# (migrations are committed — do not ignore)
+
+## Test results
+TestResults/
+coverage/
+*.trx
+*.coveragexml
+*.coverage
+
+## Environment files
+.env
+.env.*
+!.env.example
+
+## IDE / Editor
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*.tmp
+
+## OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## NuGet
+*.nupkg
+.nuget/
+nuget.config.local
+
+## Logs
+*.log
+logs/
