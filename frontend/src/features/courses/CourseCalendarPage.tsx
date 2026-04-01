@@ -1,16 +1,16 @@
 import { Group, Text, Badge, Grid, Paper, ActionIcon, Title, Stack } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueries } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import dayjs from 'dayjs';
-import { listCourses } from './coursesApi';
-import type { CourseListItem } from './types';
+import { listCourses, getCourse } from './coursesApi';
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 interface DaySession {
   courseId: string;
   courseTitle: string;
+  time: string; // "HH:mm"
 }
 
 export function CourseCalendarPage() {
@@ -22,7 +22,18 @@ export function CourseCalendarPage() {
     queryFn: listCourses,
   });
 
-  const sessionsByDay = buildSessionsByDay(courses, currentMonth);
+  const courseDetailQueries = useQueries({
+    queries: courses.map((course) => ({
+      queryKey: ['courses', course.id],
+      queryFn: () => getCourse(course.id),
+      staleTime: 5 * 60 * 1000,
+    })),
+  });
+
+  const sessionsByDay = buildSessionsByDay(
+    courses.map((c, i) => ({ course: c, sessions: courseDetailQueries[i].data?.sessions ?? [] })),
+    currentMonth
+  );
 
   const startOfMonth = currentMonth.startOf('month');
   const endOfMonth = currentMonth.endOf('month');
@@ -76,7 +87,7 @@ export function CourseCalendarPage() {
                     onClick={() => navigate(`/app/courses/${s.courseId}`)}
                     variant="light"
                   >
-                    {s.courseTitle}
+                    {s.time} {s.courseTitle}
                   </Badge>
                 ))}
               </Paper>
@@ -91,18 +102,28 @@ export function CourseCalendarPage() {
 }
 
 function buildSessionsByDay(
-  courses: CourseListItem[],
+  entries: { course: { id: string; title: string }; sessions: { scheduledAt: string }[] }[],
   month: dayjs.Dayjs
 ): Record<number, DaySession[]> {
   const result: Record<number, DaySession[]> = {};
 
-  for (const course of courses) {
-    if (!course.firstSessionAt) continue;
-    const date = dayjs(course.firstSessionAt);
-    if (date.month() !== month.month() || date.year() !== month.year()) continue;
-    const day = date.date();
-    if (!result[day]) result[day] = [];
-    result[day].push({ courseId: course.id, courseTitle: course.title });
+  for (const { course, sessions } of entries) {
+    for (const session of sessions) {
+      const date = dayjs(session.scheduledAt);
+      if (date.month() !== month.month() || date.year() !== month.year()) continue;
+      const day = date.date();
+      if (!result[day]) result[day] = [];
+      result[day].push({
+        courseId: course.id,
+        courseTitle: course.title,
+        time: date.format('HH:mm'),
+      });
+    }
+  }
+
+  // Sort each day's sessions by time
+  for (const day of Object.keys(result)) {
+    result[Number(day)].sort((a, b) => a.time.localeCompare(b.time));
   }
 
   return result;

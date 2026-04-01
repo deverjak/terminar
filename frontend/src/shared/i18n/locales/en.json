@@ -14,7 +14,25 @@
     "cancelConfirm": "Are you sure you want to cancel this course? This cannot be undone.",
     "cancelSuccess": "Course cancelled.", "createSuccess": "Course created.", "updateSuccess": "Course updated.",
     "detail": { "sessions": "Sessions", "viewRoster": "View Roster", "editCourse": "Edit", "createdAt": "Created", "updatedAt": "Updated", "noSessions": "No sessions scheduled." },
-    "form": { "title": "Title", "description": "Description", "courseType": "Course type", "registrationMode": "Registration mode", "capacity": "Max capacity", "sessions": "Sessions", "addSession": "Add session", "removeSession": "Remove", "scheduledAt": "Date & time", "durationMinutes": "Duration (minutes)", "location": "Location (optional)", "futureDateRequired": "Session must be scheduled in the future.", "saveButton": "Save", "cancelButton": "Cancel" }
+    "form": { "title": "Title", "description": "Description", "courseType": "Course type", "registrationMode": "Registration mode", "capacity": "Max capacity", "sessions": "Sessions", "addSession": "Add session", "removeSession": "Remove", "scheduledAt": "Date & time", "durationMinutes": "Duration (minutes)", "location": "Location (optional)", "futureDateRequired": "Session must be scheduled in the future.", "saveButton": "Save", "cancelButton": "Cancel" },
+    "recurrence": {
+      "modeToggle": { "manual": "Manual", "recurrent": "Recurrent" },
+      "addRule": "Add recurrence rule",
+      "removeRule": "Remove rule",
+      "ruleLabel": "Rule {{index}}",
+      "dayOfWeek": { "label": "Day of week", "monday": "Monday", "tuesday": "Tuesday", "wednesday": "Wednesday", "thursday": "Thursday", "friday": "Friday", "saturday": "Saturday", "sunday": "Sunday" },
+      "startTime": { "label": "Start time" },
+      "seriesStartDate": { "label": "Series start date" },
+      "endCondition": { "label": "End condition", "byCount": "By number of sessions", "byDate": "By end date" },
+      "occurrences": { "label": "Number of sessions" },
+      "largeCountWarning": "Generating {{count}} sessions — please review the list carefully before submitting.",
+      "endDate": { "label": "End date" },
+      "duration": { "label": "Session duration (minutes)" },
+      "location": { "label": "Location (optional, applies to all sessions)" },
+      "preview": { "title": "Session Preview", "sessionCount": "{{count}} sessions", "addManual": "Add session manually", "duplicateWarning": "Duplicate", "duplicateAlert": "Some sessions have the same date and time. Please review before submitting.", "empty": "No sessions generated yet. Configure a recurrence rule above.", "noSessionsError": "At least one session is required." },
+      "switchMode": { "confirmTitle": "Switch session mode?", "confirmMessage": "Switching modes will discard your current session list. Are you sure?", "confirm": "Switch and discard", "cancel": "Keep current sessions" },
+      "sourceBadge": { "generated": "Generated", "manual": "Manual" }
+    }
   },
   "sessions": { "columns": { "sequence": "#", "scheduledAt": "Date & Time", "duration": "Duration", "location": "Location", "endsAt": "Ends At" }, "minutes": "min" },
   "registrations": {
