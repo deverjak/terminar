@@ -67,3 +67,34 @@ export interface CalendarEvent {
   durationMinutes: number;
   location: string | null;
 }
+
+// --- Recurrence types ---
+
+export type DayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0=Sun … 6=Sat (matches Date.getDay())
+
+export interface RecurrenceRule {
+  id: string;
+  dayOfWeek: DayOfWeek | null;
+  startTime: string; // "HH:MM" 24-hour
+  seriesStartDate: string | null; // "YYYY-MM-DD" — matches DatePickerInput output
+  endCondition: 'count' | 'date';
+  occurrences: number; // used when endCondition = 'count'
+  endDate: string | null; // "YYYY-MM-DD" — matches DatePickerInput output
+}
+
+export interface GeneratedSession {
+  key: string; // `${ruleId}-${index}`
+  ruleId: string;
+  scheduledAt: Date;
+}
+
+export interface SessionPreviewEntry {
+  key: string;
+  scheduledAt: Date;
+  durationMinutes: number;
+  location: string;
+  source: 'recurrence' | 'manual';
+  ruleId: string | null;
+  isDeleted: boolean;
+  isDuplicate: boolean;
+}

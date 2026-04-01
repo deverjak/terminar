@@ -14,7 +14,25 @@
     "cancelConfirm": "Opravdu chcete zrušit tento kurz? Tuto akci nelze vrátit zpět.",
     "cancelSuccess": "Kurz byl zrušen.", "createSuccess": "Kurz byl vytvořen.", "updateSuccess": "Kurz byl aktualizován.",
     "detail": { "sessions": "Lekce", "viewRoster": "Zobrazit přihlášky", "editCourse": "Upravit", "createdAt": "Vytvořeno", "updatedAt": "Aktualizováno", "noSessions": "Žádné naplánované lekce." },
-    "form": { "title": "Název", "description": "Popis", "courseType": "Typ kurzu", "registrationMode": "Režim přihlašování", "capacity": "Maximální kapacita", "sessions": "Lekce", "addSession": "Přidat lekci", "removeSession": "Odebrat", "scheduledAt": "Datum a čas", "durationMinutes": "Délka (minuty)", "location": "Místo (nepovinné)", "futureDateRequired": "Lekce musí být naplánována v budoucnosti.", "saveButton": "Uložit", "cancelButton": "Zrušit" }
+    "form": { "title": "Název", "description": "Popis", "courseType": "Typ kurzu", "registrationMode": "Režim přihlašování", "capacity": "Maximální kapacita", "sessions": "Lekce", "addSession": "Přidat lekci", "removeSession": "Odebrat", "scheduledAt": "Datum a čas", "durationMinutes": "Délka (minuty)", "location": "Místo (nepovinné)", "futureDateRequired": "Lekce musí být naplánována v budoucnosti.", "saveButton": "Uložit", "cancelButton": "Zrušit" },
+    "recurrence": {
+      "modeToggle": { "manual": "Ručně", "recurrent": "Opakovaně" },
+      "addRule": "Přidat pravidlo opakování",
+      "removeRule": "Odebrat pravidlo",
+      "ruleLabel": "Pravidlo {{index}}",
+      "dayOfWeek": { "label": "Den v týdnu", "monday": "Pondělí", "tuesday": "Úterý", "wednesday": "Středa", "thursday": "Čtvrtek", "friday": "Pátek", "saturday": "Sobota", "sunday": "Neděle" },
+      "startTime": { "label": "Čas začátku" },
+      "seriesStartDate": { "label": "Datum začátku série" },
+      "endCondition": { "label": "Ukončení", "byCount": "Počtem lekcí", "byDate": "Datem ukončení" },
+      "occurrences": { "label": "Počet lekcí" },
+      "largeCountWarning": "Bude vygenerováno {{count}} lekcí — před odesláním si seznam pečlivě zkontrolujte.",
+      "endDate": { "label": "Datum ukončení" },
+      "duration": { "label": "Délka lekce (minuty)" },
+      "location": { "label": "Místo (nepovinné, platí pro všechny lekce)" },
+      "preview": { "title": "Náhled lekcí", "sessionCount": "{{count}} lekcí", "addManual": "Přidat lekci ručně", "duplicateWarning": "Duplikát", "duplicateAlert": "Některé lekce mají stejné datum a čas. Před odesláním je zkontrolujte.", "empty": "Zatím nebyly vygenerovány žádné lekce. Nastavte pravidlo opakování výše.", "noSessionsError": "Je vyžadována alespoň jedna lekce." },
+      "switchMode": { "confirmTitle": "Přepnout režim lekcí?", "confirmMessage": "Přepnutím režimu smažete aktuální seznam lekcí. Jste si jisti?", "confirm": "Přepnout a zahodit", "cancel": "Zachovat aktuální lekce" },
+      "sourceBadge": { "generated": "Vygenerováno", "manual": "Ručně" }
+    }
   },
   "sessions": { "columns": { "sequence": "#", "scheduledAt": "Datum a čas", "duration": "Délka", "location": "Místo", "endsAt": "Konec" }, "minutes": "min" },
   "registrations": {
