@@ -75,7 +75,7 @@ export function CreateCoursePage() {
       courseType: 'OneTime',
       registrationMode: 'Open',
       capacity: 10,
-      sessions: [],
+      sessions: [{ scheduledAt: null, durationMinutes: 60, location: '' }],
     },
     validate: {
       title: (v) => (v.trim().length === 0 ? t('common.required') : null),
@@ -221,6 +221,19 @@ export function CreateCoursePage() {
     setRules((prev) => [...prev, createEmptyRule()]);
   };
 
+  // --- Course type change ---
+  const handleCourseTypeChange = (value: string | null) => {
+    const newType = (value ?? 'OneTime') as CourseType;
+    form.setFieldValue('courseType', newType);
+    if (newType === 'OneTime') {
+      // Force manual mode and keep only the first session (or add one if empty)
+      setMode('manual');
+      setPendingMode(null);
+      const first = form.values.sessions[0] ?? { scheduledAt: null, durationMinutes: 60, location: '' };
+      form.setFieldValue('sessions', [first]);
+    }
+  };
+
   // --- Form submission (T009, T019) ---
   const handleSubmit = async (values: CreateCourseFormValues) => {
     if (mode === 'recurrence') {
@@ -312,6 +325,7 @@ export function CreateCoursePage() {
                   { value: 'MultiSession', label: t('courses.types.MultiSession') },
                 ]}
                 {...form.getInputProps('courseType')}
+                onChange={handleCourseTypeChange}
               />
               <Select
                 label={t('courses.form.registrationMode')}
@@ -330,18 +344,41 @@ export function CreateCoursePage() {
 
               {/* Sessions section */}
               <div>
-                <Group justify="space-between" mb="sm">
-                  <Text fw={500}>{t('courses.form.sessions')}</Text>
-                  <SegmentedControl
-                    value={mode}
-                    onChange={(v) => handleModeChange(v as 'manual' | 'recurrence')}
-                    data={[
-                      { value: 'manual', label: t('courses.recurrence.modeToggle.manual') },
-                      { value: 'recurrence', label: t('courses.recurrence.modeToggle.recurrent') },
-                    ]}
-                    size="xs"
-                  />
-                </Group>
+                {form.values.courseType === 'OneTime' ? (
+                  /* One-time course: single fixed session, no add/remove, no mode toggle */
+                  <Stack gap="sm">
+                    <Text fw={500}>{t('courses.form.sessions')}</Text>
+                    <DateTimePicker
+                      label={t('courses.form.scheduledAt')}
+                      required
+                      {...form.getInputProps('sessions.0.scheduledAt')}
+                    />
+                    <NumberInput
+                      label={t('courses.form.durationMinutes')}
+                      min={1}
+                      required
+                      {...form.getInputProps('sessions.0.durationMinutes')}
+                    />
+                    <TextInput
+                      label={t('courses.form.location')}
+                      {...form.getInputProps('sessions.0.location')}
+                    />
+                  </Stack>
+                ) : (
+                  /* Multi-session course: mode toggle + full session management */
+                  <Stack gap="sm">
+                    <Group justify="space-between">
+                      <Text fw={500}>{t('courses.form.sessions')}</Text>
+                      <SegmentedControl
+                        value={mode}
+                        onChange={(v) => handleModeChange(v as 'manual' | 'recurrence')}
+                        data={[
+                          { value: 'manual', label: t('courses.recurrence.modeToggle.manual') },
+                          { value: 'recurrence', label: t('courses.recurrence.modeToggle.recurrent') },
+                        ]}
+                        size="xs"
+                      />
+                    </Group>
 
                 {mode === 'manual' ? (
                   <Stack gap="sm">
@@ -436,6 +473,8 @@ export function CreateCoursePage() {
                         onAddManual={handleAddManual}
                       />
                     </Paper>
+                  </Stack>
+                )}
                   </Stack>
                 )}
               </div>
