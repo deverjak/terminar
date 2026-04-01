@@ -5,6 +5,7 @@ namespace Terminar.Modules.Identity.Application.Commands.CreateStaffUser;
 
 public sealed record CreateStaffUserCommand(
     TenantId TenantId,
+    string TenantSlug,
     string Username,
     string Email,
     string Password,

@@ -1,8 +1,10 @@
 ﻿# terminar Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-30
+Auto-generated from all feature plans. Last updated: 2026-03-31
 
 ## Active Technologies
+- TypeScript 5.x, React 19, Node.js 22+ + Mantine v9, React Router v7, TanStack Query v5, react-i18next, Vite 6 (002-web-ui-frontend)
+- No database — all state via backend API; access token in memory, refresh token + tenant slug in localStorage (002-web-ui-frontend)
 
 - C# 14 / .NET 10 + ASP.NET Core 10 (Minimal APIs), ASP.NET Core Identity (Infrastructure only), MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), .NET Aspire (9.x latest stable), StronglyTypedId 2.x (001-course-reservation-system)
 
@@ -55,6 +57,7 @@ dotnet user-jwts create --role Staff
 - Minimal APIs in `Terminar.Api` — route registration only, delegate to MediatR commands/queries
 
 ## Recent Changes
+- 002-web-ui-frontend: Added TypeScript 5.x, React 19, Node.js 22+ + Mantine v9, React Router v7, TanStack Query v5, react-i18next, Vite 6
 
 - 001-course-reservation-system: Added C# 14 / .NET 10 + ASP.NET Core 10 (Minimal APIs), MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), .NET Aspire (9.x latest stable), BCrypt.Net-Next 4.x, StronglyTypedId 2.x
 

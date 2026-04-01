@@ -17,8 +17,8 @@ public sealed class CreateStaffUserCommandHandler(UserManager<AppIdentityUser> u
             throw new ConflictException($"Username '{request.Username}' is already taken in this tenant.");
 
         var existingByEmail = await userManager.FindByEmailAsync(request.Email);
-        if (existingByEmail is not null && existingByEmail.TenantId == request.TenantId.Value)
-            throw new ConflictException($"Email '{request.Email}' is already registered in this tenant.");
+        if (existingByEmail is not null)
+            throw new ConflictException($"Email '{request.Email}' is already registered.");
 
         var identityUser = new AppIdentityUser
         {
@@ -26,6 +26,7 @@ public sealed class CreateStaffUserCommandHandler(UserManager<AppIdentityUser> u
             UserName = request.Username,
             Email = request.Email.ToLowerInvariant(),
             TenantId = request.TenantId.Value,
+            TenantSlug = request.TenantSlug,
             Role = request.Role,
             IsActive = true
         };

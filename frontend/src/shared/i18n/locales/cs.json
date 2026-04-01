@@ -1,0 +1,40 @@
+{
+  "nav": { "courses": "Kurzy", "staff": "Personál", "logout": "Odhlásit se" },
+  "landing": { "title": "Termínář", "tagline": "Správa kurzů pro vaši organizaci", "createWorkspace": "Vytvořit pracovní prostor", "login": "Přihlásit se" },
+  "auth": { "login": "Přihlásit se", "email": "E-mail", "password": "Heslo", "loginButton": "Přihlásit se", "invalidCredentials": "Neplatné přihlašovací údaje. Zkuste to znovu.", "loggingIn": "Přihlašování..." },
+  "tenants": { "register": "Vytvořit pracovní prostor", "orgName": "Název organizace", "orgNamePlaceholder": "Acme s.r.o.", "slug": "Identifikátor pracovního prostoru", "slugHint": "Malá písmena, číslice, pomlčky. 3–63 znaků.", "language": "Výchozí jazyk", "langEn": "Angličtina", "langCs": "Čeština", "adminUsername": "Uživatelské jméno správce", "adminEmail": "E-mail správce", "adminPassword": "Heslo správce", "confirmPassword": "Potvrdit heslo", "passwordMismatch": "Hesla se neshodují", "creating": "Vytváření pracovního prostoru...", "slugTaken": "Tento identifikátor pracovního prostoru je již obsazen.", "createButton": "Vytvořit pracovní prostor" },
+  "courses": {
+    "title": "Kurzy", "newCourse": "Nový kurz", "listView": "Seznam", "calendarView": "Kalendář",
+    "noCourses": "Zatím žádné kurzy", "noCoursesHint": "Začněte vytvořením prvního kurzu.",
+    "columns": { "title": "Název", "type": "Typ", "status": "Stav", "capacity": "Kapacita", "sessions": "Lekce", "firstSession": "První lekce" },
+    "types": { "OneTime": "Jednorázový", "MultiSession": "Vícelekční" },
+    "modes": { "Open": "Otevřený", "StaffOnly": "Pouze personál" },
+    "statuses": { "Draft": "Koncept", "Active": "Aktivní", "Cancelled": "Zrušeno", "Completed": "Dokončeno" },
+    "create": "Vytvořit kurz", "edit": "Upravit kurz", "cancel": "Zrušit kurz",
+    "cancelConfirm": "Opravdu chcete zrušit tento kurz? Tuto akci nelze vrátit zpět.",
+    "cancelSuccess": "Kurz byl zrušen.", "createSuccess": "Kurz byl vytvořen.", "updateSuccess": "Kurz byl aktualizován.",
+    "detail": { "sessions": "Lekce", "viewRoster": "Zobrazit přihlášky", "editCourse": "Upravit", "createdAt": "Vytvořeno", "updatedAt": "Aktualizováno", "noSessions": "Žádné naplánované lekce." },
+    "form": { "title": "Název", "description": "Popis", "courseType": "Typ kurzu", "registrationMode": "Režim přihlašování", "capacity": "Maximální kapacita", "sessions": "Lekce", "addSession": "Přidat lekci", "removeSession": "Odebrat", "scheduledAt": "Datum a čas", "durationMinutes": "Délka (minuty)", "location": "Místo (nepovinné)", "futureDateRequired": "Lekce musí být naplánována v budoucnosti.", "saveButton": "Uložit", "cancelButton": "Zrušit" }
+  },
+  "sessions": { "columns": { "sequence": "#", "scheduledAt": "Datum a čas", "duration": "Délka", "location": "Místo", "endsAt": "Konec" }, "minutes": "min" },
+  "registrations": {
+    "title": "Přihlášky", "addRegistration": "Přidat přihlášku", "noRegistrations": "Zatím žádné přihlášky.",
+    "columns": { "name": "Jméno", "email": "E-mail", "source": "Zdroj", "status": "Stav", "registeredAt": "Přihlášeno" },
+    "sources": { "SelfService": "Samoobsluha", "StaffAdded": "Přidáno personálem" },
+    "statuses": { "Confirmed": "Potvrzeno", "Cancelled": "Zrušeno" },
+    "filter": { "all": "Vše", "confirmed": "Potvrzeno", "cancelled": "Zrušeno" },
+    "form": { "participantName": "Jméno účastníka", "participantEmail": "E-mail účastníka", "submitButton": "Přidat přihlášku", "fullCapacity": "Tento kurz je plně obsazen." },
+    "cancelConfirm": "Zrušit tuto přihlášku?", "cancelSuccess": "Přihláška byla zrušena.", "addSuccess": "Přihláška byla přidána."
+  },
+  "staff": {
+    "title": "Personál", "addStaff": "Přidat uživatele", "noStaff": "Zatím žádní uživatelé personálu.",
+    "columns": { "username": "Uživatelské jméno", "email": "E-mail", "role": "Role", "status": "Stav", "createdAt": "Vytvořeno" },
+    "roles": { "Admin": "Správce", "Staff": "Personál" },
+    "statuses": { "Active": "Aktivní", "Inactive": "Neaktivní" },
+    "deactivate": "Deaktivovat", "deactivateConfirm": "Deaktivovat tohoto uživatele? Nebude se moci přihlásit.",
+    "deactivateSuccess": "Uživatel byl deaktivován.", "createSuccess": "Uživatel byl vytvořen.",
+    "form": { "username": "Uživatelské jméno", "email": "E-mail", "password": "Heslo", "role": "Role", "submitButton": "Vytvořit uživatele" },
+    "accessDenied": "Pro správu personálu potřebujete oprávnění správce."
+  },
+  "common": { "loading": "Načítání...", "save": "Uložit", "cancel": "Zrušit", "confirm": "Potvrdit", "back": "Zpět", "notFound": "Stránka nenalezena", "notFoundHint": "Stránka, kterou hledáte, neexistuje.", "backHome": "Zpět na hlavní stránku", "error": "Došlo k chybě. Zkuste to znovu.", "serverError": "Chyba serveru. Zkuste to prosím později.", "connectionError": "Chyba připojení. Zkontrolujte síťové připojení.", "required": "Toto pole je povinné.", "invalidEmail": "Zadejte platnou e-mailovou adresu." }
+}

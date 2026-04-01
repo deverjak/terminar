@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Terminar.Api.Middleware;
@@ -22,7 +23,7 @@ public static class IdentityModule
             IMediator mediator,
             CancellationToken ct) =>
         {
-            var result = await mediator.Send(new LoginCommand(req.Username, req.Password), ct);
+            var result = await mediator.Send(new LoginCommand(req.Email, req.Password), ct);
             return Results.Ok(result);
         });
 
@@ -53,12 +54,14 @@ public static class IdentityModule
         staff.MapPost("/", async (
             [FromBody] CreateStaffUserRequest req,
             ITenantContext tenantCtx,
+            HttpContext httpContext,
             IMediator mediator,
             CancellationToken ct) =>
         {
             var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
+            var tenantSlug = httpContext.User.FindFirst("tenant_slug")?.Value ?? string.Empty;
             var result = await mediator.Send(
-                new CreateStaffUserCommand(tenantId, req.Username, req.Email, req.Password, req.Role), ct);
+                new CreateStaffUserCommand(tenantId, tenantSlug, req.Username, req.Email, req.Password, req.Role), ct);
             return Results.Created($"/api/v1/staff/{result.StaffUserId}", result);
         });
 
@@ -75,6 +78,6 @@ public static class IdentityModule
     }
 }
 
-public sealed record LoginRequest(string Username, string Password);
+public sealed record LoginRequest(string Email, string Password);
 public sealed record RefreshTokenRequest(Guid UserId, string RefreshToken);
 public sealed record CreateStaffUserRequest(string Username, string Email, string Password, string Role);
