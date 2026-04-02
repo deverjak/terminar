@@ -16,17 +16,21 @@ public sealed class RegistrationRepository(RegistrationsDbContext db) : IRegistr
     }
 
     public async Task<Registration?> GetBySafeLinkTokenAsync(Guid safeLinkToken, Guid tenantId, CancellationToken ct = default)
-        => await db.Registrations.FirstOrDefaultAsync(r => r.SafeLinkToken == safeLinkToken && r.TenantId.Value == tenantId, ct);
+    {
+        var tid = TenantId.From(tenantId);
+        return await db.Registrations.FirstOrDefaultAsync(r => r.SafeLinkToken == safeLinkToken && r.TenantId == tid, ct);
+    }
 
     public async Task<Registration?> GetByEmailAndCourseAsync(string email, Guid courseId, Guid tenantId, CancellationToken ct = default)
     {
         var tid = TenantId.From(tenantId);
         var normalizedEmail = email.Trim().ToLowerInvariant();
+        var email = Email.From(normalizedEmail);
         return await db.Registrations
             .FirstOrDefaultAsync(r =>
                 r.CourseId == courseId &&
                 r.TenantId == tid &&
-                r.ParticipantEmail.Value == normalizedEmail &&
+                r.ParticipantEmail == email &&
                 r.Status == RegistrationStatus.Confirmed, ct);
     }
 
@@ -41,15 +45,20 @@ public sealed class RegistrationRepository(RegistrationsDbContext db) : IRegistr
         await CountConfirmedByCourseAsync(courseId, tenantId, ct);
 
     public async Task<List<Registration>> ListByEmailAndTenantAsync(string email, Guid tenantId, CancellationToken ct = default)
-        => await db.Registrations.Where(r => r.ParticipantEmail.Value == email && r.TenantId.Value == tenantId).ToListAsync(ct);
+    {
+        var tid = TenantId.From(tenantId);
+        var participantEmail = Email.From(email);
+        return await db.Registrations.Where(r => r.ParticipantEmail == participantEmail && r.TenantId == tid).ToListAsync(ct);
+    }
 
     public async Task<bool> HasActiveRegistrationsAsync(Guid tenantId, string participantEmail, CancellationToken ct = default)
     {
         var tid = TenantId.From(tenantId);
         var normalizedEmail = participantEmail.Trim().ToLowerInvariant();
+        var email = Email.From(normalizedEmail);
         return await db.Registrations
             .AnyAsync(r => r.TenantId == tid &&
-                           r.ParticipantEmail.Value == normalizedEmail &&
+                           r.ParticipantEmail == email &&
                            r.Status == RegistrationStatus.Confirmed, ct);
     }
 

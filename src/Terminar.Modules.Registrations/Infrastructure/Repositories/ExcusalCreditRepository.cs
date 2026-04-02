@@ -1,28 +1,36 @@
 using Microsoft.EntityFrameworkCore;
 using Terminar.Modules.Registrations.Domain;
 using Terminar.Modules.Registrations.Domain.Repositories;
+using Terminar.SharedKernel.ValueObjects;
 
 namespace Terminar.Modules.Registrations.Infrastructure.Repositories;
 
 public sealed class ExcusalCreditRepository(RegistrationsDbContext db) : IExcusalCreditRepository
 {
     public async Task<ExcusalCredit?> GetByIdAsync(Guid id, Guid tenantId, CancellationToken ct = default)
-        => await db.ExcusalCredits
+    {
+        var tid = TenantId.From(tenantId);
+        return await db.ExcusalCredits
             .Include(x => x.AuditEntries)
-            .FirstOrDefaultAsync(x => x.Id == id && x.TenantId.Value == tenantId, ct);
+            .FirstOrDefaultAsync(x => x.Id == id && x.TenantId == tid, ct);
+    }
 
     public async Task<List<ExcusalCredit>> ListByParticipantEmailAsync(string email, Guid tenantId, CancellationToken ct = default)
-        => await db.ExcusalCredits
-            .Where(x => x.ParticipantEmail == email && x.TenantId.Value == tenantId)
+    {
+        var tid = TenantId.From(tenantId);
+        return await db.ExcusalCredits
+            .Where(x => x.ParticipantEmail == email && x.TenantId == tid)
             .OrderByDescending(x => x.CreatedAt)
             .ToListAsync(ct);
+    }
 
     public async Task<(List<ExcusalCredit> Items, int Total)> ListByTenantAsync(
         Guid tenantId, ExcusalCreditStatus? status, string? participantEmail, int page, int pageSize, CancellationToken ct = default)
     {
+        var tid = TenantId.From(tenantId);
         var query = db.ExcusalCredits
             .Include(x => x.AuditEntries)
-            .Where(x => x.TenantId.Value == tenantId);
+            .Where(x => x.TenantId == tid);
 
         if (status.HasValue) query = query.Where(x => x.Status == status);
         if (!string.IsNullOrEmpty(participantEmail)) query = query.Where(x => x.ParticipantEmail == participantEmail);
