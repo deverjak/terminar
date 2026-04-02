@@ -46,7 +46,7 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
             e.HasIndex(x => new { x.TenantId, x.Name }).IsUnique().HasFilter("deleted_at IS NULL");
             e.Property(x => x.CreatedAt).HasColumnName("created_at");
             e.Property(x => x.DeletedAt).HasColumnName("deleted_at");
-            e.HasQueryFilter(x => !x.IsDeleted);
+            e.HasQueryFilter(x => x.DeletedAt == null);
             e.Ignore(x => x.DomainEvents);
             e.Ignore(x => x.IsDeleted);
         });
