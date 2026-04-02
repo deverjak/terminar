@@ -39,10 +39,7 @@ public sealed class CoursesDbContext(DbContextOptions<CoursesDbContext> options,
                 p.Property(x => x.ValidityWindowId).HasColumnName("excusal_validity_window_id");
                 p.Property(x => x.Tags)
                     .HasColumnName("excusal_tags")
-                    .HasColumnType("text[]")
-                    .HasConversion(
-                        v => v.ToArray(),
-                        v => v.ToList());
+                    .HasColumnType("text[]");
             });
         });
 

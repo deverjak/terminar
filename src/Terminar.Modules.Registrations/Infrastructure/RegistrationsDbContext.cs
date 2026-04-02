@@ -69,11 +69,9 @@ public sealed class RegistrationsDbContext(DbContextOptions<RegistrationsDbConte
             e.Property(x => x.ParticipantName).HasMaxLength(200).IsRequired();
             e.Property(x => x.Status).HasConversion<string>().HasMaxLength(50);
             e.Property(x => x.Tags)
-                .HasColumnType("text[]")
-                .HasConversion(v => v.ToArray(), v => v.ToList());
+                .HasColumnType("text[]");
             e.Property(x => x.ValidWindowIds)
-                .HasColumnType("uuid[]")
-                .HasConversion(v => v.ToArray(), v => v.ToList());
+                .HasColumnType("uuid[]");
             e.OwnsMany(x => x.AuditEntries, a =>
             {
                 a.WithOwner().HasForeignKey(x => x.ExcusalCreditId);
