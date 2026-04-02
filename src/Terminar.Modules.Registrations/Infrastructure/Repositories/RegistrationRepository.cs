@@ -24,13 +24,12 @@ public sealed class RegistrationRepository(RegistrationsDbContext db) : IRegistr
     public async Task<Registration?> GetByEmailAndCourseAsync(string email, Guid courseId, Guid tenantId, CancellationToken ct = default)
     {
         var tid = TenantId.From(tenantId);
-        var normalizedEmail = email.Trim().ToLowerInvariant();
-        var email = Email.From(normalizedEmail);
+        var participantEmail = Email.From(email.Trim().ToLowerInvariant());
         return await db.Registrations
             .FirstOrDefaultAsync(r =>
                 r.CourseId == courseId &&
                 r.TenantId == tid &&
-                r.ParticipantEmail == email &&
+                r.ParticipantEmail == participantEmail &&
                 r.Status == RegistrationStatus.Confirmed, ct);
     }
 
