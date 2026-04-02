@@ -9,4 +9,6 @@ public sealed record RegistrationCreated(
     Guid RegistrationId,
     Guid CourseId,
     TenantId TenantId,
-    string ParticipantEmail) : IDomainEvent;
+    string ParticipantEmail,
+    string ParticipantName,
+    Guid SafeLinkToken) : IDomainEvent;

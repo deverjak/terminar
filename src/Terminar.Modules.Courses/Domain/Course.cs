@@ -19,6 +19,7 @@ public sealed class Course : AggregateRoot<Guid>
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
     public IReadOnlyList<Session> Sessions => _sessions.AsReadOnly();
+    public CourseExcusalPolicy ExcusalPolicy { get; private set; } = new();
 
     private Course() { }
 
@@ -88,6 +89,14 @@ public sealed class Course : AggregateRoot<Guid>
         Status = CourseStatus.Cancelled;
         UpdatedAt = DateTime.UtcNow;
         RaiseDomainEvent(new CourseCancelled(Guid.NewGuid(), UpdatedAt, Id, TenantId));
+    }
+
+    public void UpdateExcusalPolicy(bool? creditGenerationOverride, Guid? validityWindowId, List<string>? tags)
+    {
+        ExcusalPolicy.CreditGenerationOverride = creditGenerationOverride;
+        if (validityWindowId is not null) ExcusalPolicy.ValidityWindowId = validityWindowId;
+        if (tags is not null) ExcusalPolicy.Tags = tags;
+        UpdatedAt = DateTime.UtcNow;
     }
 
     public void Complete()

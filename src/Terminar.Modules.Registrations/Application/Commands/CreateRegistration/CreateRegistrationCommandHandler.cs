@@ -51,6 +51,6 @@ public sealed class CreateRegistrationCommandHandler(
             registration.RegistrationSource.ToString(),
             registration.Status.ToString(),
             registration.RegisteredAt,
-            registration.SelfCancellationToken);
+            registration.SafeLinkToken);
     }
 }

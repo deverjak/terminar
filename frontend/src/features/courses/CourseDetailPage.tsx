@@ -15,6 +15,7 @@ import { ConfirmModal } from '@/shared/components/ConfirmModal';
 import { useAuth } from '@/features/auth/useAuth';
 import { ApiError } from '@/shared/api/client';
 import { useState } from 'react';
+import { CourseExcusalPolicySection } from './components/CourseExcusalPolicySection';
 
 export function CourseDetailPage() {
   const { t } = useTranslation();
@@ -166,6 +167,10 @@ export function CourseDetailPage() {
           </Table>
         )}
       </div>
+
+      {isEditable && session?.role === 'Admin' && (
+        <CourseExcusalPolicySection courseId={id!} />
+      )}
 
       <ConfirmModal
         opened={cancelOpened}

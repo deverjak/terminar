@@ -32,6 +32,18 @@ public sealed class CoursesDbContext(DbContextOptions<CoursesDbContext> options,
                 .OnDelete(DeleteBehavior.Cascade);
 
             e.Ignore(x => x.DomainEvents);
+
+            e.OwnsOne(c => c.ExcusalPolicy, p =>
+            {
+                p.Property(x => x.CreditGenerationOverride).HasColumnName("excusal_credit_generation_override");
+                p.Property(x => x.ValidityWindowId).HasColumnName("excusal_validity_window_id");
+                p.Property(x => x.Tags)
+                    .HasColumnName("excusal_tags")
+                    .HasColumnType("text[]")
+                    .HasConversion(
+                        v => v.ToArray(),
+                        v => v.ToList());
+            });
         });
 
         modelBuilder.Entity<Session>(e =>

@@ -105,6 +105,38 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                     b.ToTable("Sessions", "courses");
                 });
 
+            modelBuilder.Entity("Terminar.Modules.Courses.Domain.Course", b =>
+                {
+                    b.OwnsOne("Terminar.Modules.Courses.Domain.CourseExcusalPolicy", "ExcusalPolicy", b1 =>
+                        {
+                            b1.Property<Guid>("CourseId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<bool?>("CreditGenerationOverride")
+                                .HasColumnType("boolean")
+                                .HasColumnName("excusal_credit_generation_override");
+
+                            b1.Property<string[]>("Tags")
+                                .IsRequired()
+                                .HasColumnType("text[]")
+                                .HasColumnName("excusal_tags");
+
+                            b1.Property<Guid?>("ValidityWindowId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("excusal_validity_window_id");
+
+                            b1.HasKey("CourseId");
+
+                            b1.ToTable("Courses", "courses");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CourseId");
+                        });
+
+                    b.Navigation("ExcusalPolicy")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Terminar.Modules.Courses.Domain.Session", b =>
                 {
                     b.HasOne("Terminar.Modules.Courses.Domain.Course", null)

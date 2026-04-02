@@ -4,7 +4,9 @@ using Terminar.Api.Middleware;
 using Terminar.Modules.Courses.Application.Commands.CancelCourse;
 using Terminar.Modules.Courses.Application.Commands.CreateCourse;
 using Terminar.Modules.Courses.Application.Commands.UpdateCourse;
+using Terminar.Modules.Courses.Application.Commands.UpdateCourseExcusalPolicy;
 using Terminar.Modules.Courses.Application.Queries.GetCourse;
+using Terminar.Modules.Courses.Application.Queries.GetCourseExcusalPolicy;
 using Terminar.Modules.Courses.Application.Queries.ListCourses;
 using Terminar.Modules.Courses.Domain;
 
@@ -86,6 +88,35 @@ public static class CoursesModule
             return Results.NoContent();
         });
 
+        // GET /api/v1/courses/{courseId}/excusal-policy
+        group.MapGet("/{courseId:guid}/excusal-policy", async (
+            Guid courseId,
+            ITenantContext tenantCtx,
+            IMediator mediator,
+            CancellationToken ct) =>
+        {
+            var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
+            var result = await mediator.Send(new GetCourseExcusalPolicyQuery(courseId, tenantId.Value), ct);
+            return result is null ? Results.NotFound() : Results.Ok(result);
+        });
+
+        // PATCH /api/v1/courses/{courseId}/excusal-policy
+        group.MapPatch("/{courseId:guid}/excusal-policy", async (
+            Guid courseId,
+            [FromBody] UpdateCourseExcusalPolicyRequest req,
+            ITenantContext tenantCtx,
+            IMediator mediator,
+            CancellationToken ct) =>
+        {
+            var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
+            await mediator.Send(new UpdateCourseExcusalPolicyCommand(
+                courseId, tenantId.Value,
+                req.CreditGenerationOverride, req.ClearOverride ?? false,
+                req.ValidityWindowId, req.ClearWindow ?? false,
+                req.Tags), ct);
+            return Results.Ok();
+        });
+
         return app;
     }
 
@@ -112,3 +143,5 @@ public sealed record UpdateCourseRequest(
     string? Description,
     int? Capacity,
     RegistrationMode? RegistrationMode);
+
+public sealed record UpdateCourseExcusalPolicyRequest(bool? CreditGenerationOverride, bool? ClearOverride, Guid? ValidityWindowId, bool? ClearWindow, List<string>? Tags);

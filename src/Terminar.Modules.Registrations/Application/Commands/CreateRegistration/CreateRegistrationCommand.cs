@@ -17,4 +17,4 @@ public sealed record CreateRegistrationResult(
     string RegistrationSource,
     string Status,
     DateTime RegisteredAt,
-    Guid SelfCancellationToken);
+    Guid SafeLinkToken);

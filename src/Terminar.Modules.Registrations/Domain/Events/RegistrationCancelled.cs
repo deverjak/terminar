@@ -8,4 +8,6 @@ public sealed record RegistrationCancelled(
     DateTime OccurredAt,
     Guid RegistrationId,
     Guid CourseId,
-    TenantId TenantId) : IDomainEvent;
+    TenantId TenantId,
+    string ParticipantEmail,
+    string ParticipantName) : IDomainEvent;

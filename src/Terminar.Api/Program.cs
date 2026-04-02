@@ -35,8 +35,11 @@ builder.Services.AddRegistrationsModule(connectionString);
 // Tenant resolution
 builder.Services.AddScoped<ITenantContext, TenantContext>();
 
-// Email notifications (stub)
-builder.Services.AddScoped<IEmailNotificationService, StubEmailNotificationService>();
+// SMTP settings
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+
+// Email notifications (SMTP)
+builder.Services.AddScoped<IEmailNotificationService, SmtpEmailNotificationService>();
 
 // Background services
 builder.Services.AddHostedService<DatabaseMigrationService>();
@@ -86,6 +89,9 @@ app.MapTenantsEndpoints();
 app.MapIdentityEndpoints();
 app.MapCoursesEndpoints();
 app.MapRegistrationsEndpoints();
+app.MapParticipantsEndpoints();
+app.MapExcusalCreditsEndpoints();
+app.MapExcusalSettingsEndpoints();
 
 app.MapGet("/health", () => Results.Ok(new { status = "healthy" })).AllowAnonymous();
 

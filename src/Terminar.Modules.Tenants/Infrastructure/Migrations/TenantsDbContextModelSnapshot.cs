@@ -23,6 +23,43 @@ namespace Terminar.Modules.Tenants.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Terminar.Modules.Tenants.Domain.ExcusalValidityWindow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "Name")
+                        .IsUnique()
+                        .HasFilter("deleted_at IS NULL");
+
+                    b.ToTable("ExcusalValidityWindows", "tenants");
+                });
+
             modelBuilder.Entity("Terminar.Modules.Tenants.Domain.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -62,6 +99,49 @@ namespace Terminar.Modules.Tenants.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("tenants", "tenants");
+                });
+
+            modelBuilder.Entity("Terminar.Modules.Tenants.Domain.Tenant", b =>
+                {
+                    b.OwnsOne("Terminar.Modules.Tenants.Domain.TenantExcusalSettings", "ExcusalSettings", b1 =>
+                        {
+                            b1.Property<Guid>("TenantId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<bool>("CreditGenerationEnabled")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("boolean")
+                                .HasDefaultValue(false)
+                                .HasColumnName("excusal_credit_generation_enabled");
+
+                            b1.Property<int>("ExcusalDeadlineHours")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasDefaultValue(24)
+                                .HasColumnName("excusal_deadline_hours");
+
+                            b1.Property<int>("ForwardWindowCount")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasDefaultValue(2)
+                                .HasColumnName("excusal_forward_window_count");
+
+                            b1.Property<int>("UnenrollmentDeadlineDays")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasDefaultValue(14)
+                                .HasColumnName("excusal_unenrollment_deadline_days");
+
+                            b1.HasKey("TenantId");
+
+                            b1.ToTable("tenants", "tenants");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TenantId");
+                        });
+
+                    b.Navigation("ExcusalSettings")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

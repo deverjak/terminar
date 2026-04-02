@@ -25,7 +25,7 @@ public sealed class CancelRegistrationCommandHandler(
         if (!isStaff)
         {
             if (!request.SelfCancellationToken.HasValue ||
-                request.SelfCancellationToken.Value != registration.SelfCancellationToken)
+                request.SelfCancellationToken.Value != registration.SafeLinkToken)
                 throw new ForbiddenException("Invalid or missing cancellation token.");
         }
 
