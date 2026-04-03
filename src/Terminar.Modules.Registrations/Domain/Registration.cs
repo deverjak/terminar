@@ -6,6 +6,7 @@ namespace Terminar.Modules.Registrations.Domain;
 
 public sealed class Registration : AggregateRoot<Guid>
 {
+    private readonly List<ParticipantFieldValue> _fieldValues = [];
     public TenantId TenantId { get; private set; } = default!;
     public Guid CourseId { get; private set; }
     public string ParticipantName { get; private set; } = string.Empty;
@@ -13,6 +14,7 @@ public sealed class Registration : AggregateRoot<Guid>
     public RegistrationSource RegistrationSource { get; private set; }
     public Guid? RegisteredByStaffId { get; private set; }
     public RegistrationStatus Status { get; private set; }
+    public IReadOnlyList<ParticipantFieldValue> FieldValues => _fieldValues.AsReadOnly();
     public DateTime RegisteredAt { get; private set; }
     public DateTime? CancelledAt { get; private set; }
     public string? CancellationReason { get; private set; }
@@ -53,6 +55,21 @@ public sealed class Registration : AggregateRoot<Guid>
             reg.ParticipantEmail.Value, reg.ParticipantName, reg.SafeLinkToken));
 
         return reg;
+    }
+
+    public void SetFieldValue(Guid fieldDefinitionId, string? value)
+    {
+        var existing = _fieldValues.FirstOrDefault(v => v.FieldDefinitionId == fieldDefinitionId);
+        if (existing is not null)
+        {
+            existing.SetValue(value);
+        }
+        else
+        {
+            _fieldValues.Add(ParticipantFieldValue.Create(Id, TenantId, fieldDefinitionId, value));
+        }
+        RaiseDomainEvent(new ParticipantFieldValueUpdated(
+            Guid.NewGuid(), DateTime.UtcNow, Id, fieldDefinitionId, value, TenantId));
     }
 
     public void Cancel(DateTime now, DateTime? lastSessionEndsAt, string? reason = null)

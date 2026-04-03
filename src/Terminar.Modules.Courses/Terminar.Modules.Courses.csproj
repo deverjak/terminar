@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Terminar.SharedKernel\Terminar.SharedKernel.csproj" />
+    <ProjectReference Include="..\Terminar.Modules.Tenants\Terminar.Modules.Tenants.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,6 +3,14 @@ import { apiFetch } from '@/shared/api/client';
 export type RegistrationSource = 'SelfService' | 'StaffAdded';
 export type RegistrationStatus = 'Confirmed' | 'Cancelled';
 
+export interface EnabledCustomFieldDto {
+  fieldDefinitionId: string;
+  name: string;
+  fieldType: 'YesNo' | 'Text' | 'OptionsList';
+  allowedValues: string[];
+  displayOrder: number;
+}
+
 export interface Registration {
   registrationId: string;
   participantName: string;
@@ -10,6 +18,7 @@ export interface Registration {
   registrationSource: RegistrationSource;
   status: RegistrationStatus;
   registeredAt: string;
+  customFieldValues: Record<string, string | null>;
 }
 
 export interface RegistrationCreated extends Registration {
@@ -22,6 +31,8 @@ export interface RosterPage {
   total: number;
   page: number;
   pageSize: number;
+  enabledCustomFields: EnabledCustomFieldDto[];
+  fieldValueSummary: Record<string, number>;
 }
 
 export const getRoster = (
@@ -42,3 +53,13 @@ export const createRegistration = (
 
 export const cancelRegistration = (courseId: string, registrationId: string): Promise<void> =>
   apiFetch(`/api/v1/courses/${courseId}/registrations/${registrationId}`, { method: 'DELETE' });
+
+export const setParticipantFieldValue = (
+  courseId: string,
+  registrationId: string,
+  data: { fieldDefinitionId: string; value: string | null }
+): Promise<void> =>
+  apiFetch(
+    `/api/v1/courses/${courseId}/registrations/${registrationId}/field-values`,
+    { method: 'PATCH', body: data }
+  );

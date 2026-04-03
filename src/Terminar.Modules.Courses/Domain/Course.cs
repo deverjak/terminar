@@ -7,6 +7,7 @@ namespace Terminar.Modules.Courses.Domain;
 public sealed class Course : AggregateRoot<Guid>
 {
     private readonly List<Session> _sessions = [];
+    private readonly List<CourseFieldAssignment> _customFieldAssignments = [];
 
     public TenantId TenantId { get; private set; } = default!;
     public string Title { get; private set; } = string.Empty;
@@ -19,6 +20,7 @@ public sealed class Course : AggregateRoot<Guid>
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
     public IReadOnlyList<Session> Sessions => _sessions.AsReadOnly();
+    public IReadOnlyList<CourseFieldAssignment> CustomFieldAssignments => _customFieldAssignments.AsReadOnly();
     public CourseExcusalPolicy ExcusalPolicy { get; private set; } = new();
 
     private Course() { }
@@ -89,6 +91,17 @@ public sealed class Course : AggregateRoot<Guid>
         Status = CourseStatus.Cancelled;
         UpdatedAt = DateTime.UtcNow;
         RaiseDomainEvent(new CourseCancelled(Guid.NewGuid(), UpdatedAt, Id, TenantId));
+    }
+
+    public void SetCustomFieldAssignments(IEnumerable<Guid> fieldDefinitionIds)
+    {
+        _customFieldAssignments.Clear();
+        var order = 0;
+        foreach (var fieldId in fieldDefinitionIds)
+        {
+            _customFieldAssignments.Add(CourseFieldAssignment.Create(Id, fieldId, order++));
+        }
+        UpdatedAt = DateTime.UtcNow;
     }
 
     public void UpdateExcusalPolicy(bool? creditGenerationOverride, Guid? validityWindowId, List<string>? tags)

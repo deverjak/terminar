@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Terminar.Modules.Registrations.Infrastructure;
@@ -12,9 +13,11 @@ using Terminar.Modules.Registrations.Infrastructure;
 namespace Terminar.Modules.Registrations.Infrastructure.Migrations
 {
     [DbContext(typeof(RegistrationsDbContext))]
-    partial class RegistrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260403190755_AddParticipantFieldValues")]
+    partial class AddParticipantFieldValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,20 +312,6 @@ namespace Terminar.Modules.Registrations.Infrastructure.Migrations
                         });
 
                     b.Navigation("AuditEntries");
-                });
-
-            modelBuilder.Entity("Terminar.Modules.Registrations.Domain.ParticipantFieldValue", b =>
-                {
-                    b.HasOne("Terminar.Modules.Registrations.Domain.Registration", null)
-                        .WithMany("FieldValues")
-                        .HasForeignKey("RegistrationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Terminar.Modules.Registrations.Domain.Registration", b =>
-                {
-                    b.Navigation("FieldValues");
                 });
 #pragma warning restore 612, 618
         }

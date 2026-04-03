@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Terminar.Modules.Courses.Infrastructure;
@@ -12,9 +13,11 @@ using Terminar.Modules.Courses.Infrastructure;
 namespace Terminar.Modules.Courses.Infrastructure.Migrations
 {
     [DbContext(typeof(CoursesDbContext))]
-    partial class CoursesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260403190740_AddCourseFieldAssignments")]
+    partial class AddCourseFieldAssignments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,15 +166,6 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Terminar.Modules.Courses.Domain.CourseFieldAssignment", b =>
-                {
-                    b.HasOne("Terminar.Modules.Courses.Domain.Course", null)
-                        .WithMany("CustomFieldAssignments")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Terminar.Modules.Courses.Domain.Session", b =>
                 {
                     b.HasOne("Terminar.Modules.Courses.Domain.Course", null)
@@ -182,8 +176,6 @@ namespace Terminar.Modules.Courses.Infrastructure.Migrations
 
             modelBuilder.Entity("Terminar.Modules.Courses.Domain.Course", b =>
                 {
-                    b.Navigation("CustomFieldAssignments");
-
                     b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618

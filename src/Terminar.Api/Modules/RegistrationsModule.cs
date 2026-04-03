@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Terminar.Api.Middleware;
 using Terminar.Modules.Registrations.Application.Commands.CancelRegistration;
 using Terminar.Modules.Registrations.Application.Commands.CreateRegistration;
+using Terminar.Modules.Registrations.Application.CustomFields;
 using Terminar.Modules.Registrations.Application.Queries.GetCourseRoster;
 
 namespace Terminar.Api.Modules;
@@ -66,8 +67,26 @@ public static class RegistrationsModule
                 items = result.Items,
                 total = result.Total,
                 page = result.Page,
-                page_size = result.PageSize
+                pageSize = result.PageSize,
+                enabledCustomFields = result.EnabledCustomFields,
+                fieldValueSummary = result.FieldValueSummary
             });
+        }).RequireAuthorization("StaffOrAdmin").WithTags("Registrations");
+
+        // PATCH /api/v1/courses/{courseId}/registrations/{registrationId}/field-values — Staff/Admin only
+        app.MapPatch("/api/v1/courses/{courseId:guid}/registrations/{registrationId:guid}/field-values", async (
+            Guid courseId,
+            Guid registrationId,
+            [FromBody] SetParticipantFieldValueRequest req,
+            ITenantContext tenantCtx,
+            IMediator mediator,
+            CancellationToken ct) =>
+        {
+            var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
+            var command = new SetParticipantFieldValueCommand(
+                courseId, registrationId, tenantId.Value, req.FieldDefinitionId, req.Value);
+            await mediator.Send(command, ct);
+            return Results.NoContent();
         }).RequireAuthorization("StaffOrAdmin").WithTags("Registrations");
 
         // DELETE /api/v1/courses/{courseId}/registrations/{registrationId} — public with token, or Staff
@@ -109,3 +128,4 @@ public static class RegistrationsModule
 }
 
 public sealed record CreateRegistrationRequest(string ParticipantName, string ParticipantEmail);
+public sealed record SetParticipantFieldValueRequest(Guid FieldDefinitionId, string? Value);

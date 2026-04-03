@@ -12,6 +12,7 @@ public sealed class RegistrationsDbContext(DbContextOptions<RegistrationsDbConte
     public DbSet<ParticipantMagicLink> ParticipantMagicLinks => Set<ParticipantMagicLink>();
     public DbSet<Excusal> Excusals => Set<Excusal>();
     public DbSet<ExcusalCredit> ExcusalCredits => Set<ExcusalCredit>();
+    public DbSet<ParticipantFieldValue> ParticipantFieldValues => Set<ParticipantFieldValue>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,7 +33,26 @@ public sealed class RegistrationsDbContext(DbContextOptions<RegistrationsDbConte
             e.HasIndex(x => x.TenantId);
             e.HasIndex(x => x.CourseId);
 
+            e.HasMany(x => x.FieldValues)
+                .WithOne()
+                .HasForeignKey(v => v.RegistrationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             e.Ignore(x => x.DomainEvents);
+        });
+
+        modelBuilder.Entity<ParticipantFieldValue>(e =>
+        {
+            e.ToTable("participant_field_values");
+            e.HasKey(x => x.Id);
+            e.Property(x => x.RegistrationId).IsRequired();
+            e.Property(x => x.TenantId)
+                .HasConversion(v => v.Value, v => TenantId.From(v));
+            e.Property(x => x.FieldDefinitionId).IsRequired();
+            e.Property(x => x.Value).HasColumnType("text");
+            e.Property(x => x.UpdatedAt);
+            e.HasIndex(x => new { x.RegistrationId, x.FieldDefinitionId }).IsUnique();
+            e.HasIndex(x => x.TenantId);
         });
 
         modelBuilder.Entity<ParticipantMagicLink>(e =>
@@ -89,14 +109,27 @@ public sealed class RegistrationsDbContext(DbContextOptions<RegistrationsDbConte
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        // EF Core may classify newly added owned ExcusalCreditAuditEntry entities as Modified
-        // (non-zero Guid key, no prior snapshot) instead of Added. Audit entries are immutable,
-        // so Modified state always means a newly detected entry that should be inserted.
+        // EF Core may classify newly added child entities as Modified (non-zero Guid key,
+        // no prior snapshot) instead of Added when DetectChanges discovers them via navigation.
         ChangeTracker.DetectChanges();
+
+        // Audit entries are immutable — Modified always means a newly detected insert.
         foreach (var entry in ChangeTracker.Entries<ExcusalCreditAuditEntry>()
                      .Where(e => e.State == EntityState.Modified))
         {
             entry.State = EntityState.Added;
+        }
+
+        // ParticipantFieldValue can be genuinely modified (existing row, value changed) OR
+        // wrongly classified as Modified when brand-new. Distinguish by checking whether any
+        // scalar property actually differs from its original snapshot: if nothing changed, the
+        // entity was never loaded from the DB and should be inserted.
+        foreach (var entry in ChangeTracker.Entries<ParticipantFieldValue>()
+                     .Where(e => e.State == EntityState.Modified))
+        {
+            var hasRealChanges = entry.Properties.Any(p => !Equals(p.OriginalValue, p.CurrentValue));
+            if (!hasRealChanges)
+                entry.State = EntityState.Added;
         }
 
         var result = await base.SaveChangesAsync(cancellationToken);
