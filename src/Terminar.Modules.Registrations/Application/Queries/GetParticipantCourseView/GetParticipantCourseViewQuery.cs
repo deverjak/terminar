@@ -25,5 +25,5 @@ public sealed record ParticipantSessionDto(
     bool IsPast,
     DateTime? ExcusalDeadlineAt,
     bool CanExcuse,
-    string? ExcusalStatus  // null | "Excused" | "CreditIssued"
+    string? ExcusalStatus  // null | "Excused" | "CreditActive" | "CreditRedeemed" | "CreditCancelled" | "CreditExpired"
 );

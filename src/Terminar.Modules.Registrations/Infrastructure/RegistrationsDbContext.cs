@@ -89,6 +89,16 @@ public sealed class RegistrationsDbContext(DbContextOptions<RegistrationsDbConte
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
+        // EF Core may classify newly added owned ExcusalCreditAuditEntry entities as Modified
+        // (non-zero Guid key, no prior snapshot) instead of Added. Audit entries are immutable,
+        // so Modified state always means a newly detected entry that should be inserted.
+        ChangeTracker.DetectChanges();
+        foreach (var entry in ChangeTracker.Entries<ExcusalCreditAuditEntry>()
+                     .Where(e => e.State == EntityState.Modified))
+        {
+            entry.State = EntityState.Added;
+        }
+
         var result = await base.SaveChangesAsync(cancellationToken);
 
         var events = ChangeTracker.Entries<AggregateRoot<Guid>>()

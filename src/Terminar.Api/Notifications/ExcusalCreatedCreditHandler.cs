@@ -21,7 +21,7 @@ public sealed class ExcusalCreatedCreditHandler(
         try
         {
             var tenantRecord = await tenantsDb.Tenants
-                .FirstOrDefaultAsync(t => t.Id.Value == notification.TenantId.Value, cancellationToken);
+                .FirstOrDefaultAsync(t => t.Id == notification.TenantId, cancellationToken);
             if (tenantRecord is null) return;
 
             var course = await coursesDb.Courses
@@ -38,7 +38,7 @@ public sealed class ExcusalCreatedCreditHandler(
             // Get validity windows
             var sourceWindowId = policy.ValidityWindowId!.Value;
             var allWindows = await tenantsDb.ExcusalValidityWindows
-                .Where(w => w.TenantId.Value == notification.TenantId.Value)
+                .Where(w => w.TenantId == notification.TenantId)
                 .OrderBy(w => w.StartDate)
                 .ToListAsync(cancellationToken);
 

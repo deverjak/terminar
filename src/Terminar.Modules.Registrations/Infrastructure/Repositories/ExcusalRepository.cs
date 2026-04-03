@@ -16,6 +16,9 @@ public sealed class ExcusalRepository(RegistrationsDbContext db) : IExcusalRepos
     public async Task<bool> ExistsForSessionAsync(Guid registrationId, Guid sessionId, CancellationToken ct = default)
         => await db.Excusals.AnyAsync(x => x.RegistrationId == registrationId && x.SessionId == sessionId, ct);
 
+    public async Task<List<Excusal>> ListByRegistrationAsync(Guid registrationId, CancellationToken ct = default)
+        => await db.Excusals.Where(x => x.RegistrationId == registrationId).ToListAsync(ct);
+
     public async Task<List<Excusal>> ListByCourseAsync(Guid courseId, Guid tenantId, CancellationToken ct = default)
     {
         var tid = TenantId.From(tenantId);

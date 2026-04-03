@@ -85,7 +85,10 @@ export default function ParticipantCourseViewPage() {
                 <div>
                   {session.isPast && <Badge color="gray">Past</Badge>}
                   {session.excusalStatus === 'Excused' && <Badge color="orange">{t('participant.courseView.excusedLabel')}</Badge>}
-                  {session.excusalStatus === 'CreditIssued' && <Badge color="blue">Credit issued</Badge>}
+                  {session.excusalStatus === 'CreditActive' && <Badge color="blue">Credit issued</Badge>}
+                  {session.excusalStatus === 'CreditRedeemed' && <Badge color="green">Credit redeemed</Badge>}
+                  {session.excusalStatus === 'CreditCancelled' && <Badge color="red">Credit cancelled by admin</Badge>}
+                  {session.excusalStatus === 'CreditExpired' && <Badge color="gray">Credit expired</Badge>}
                   {!session.isPast && !session.excusalStatus && (
                     session.canExcuse ? (
                       <Button

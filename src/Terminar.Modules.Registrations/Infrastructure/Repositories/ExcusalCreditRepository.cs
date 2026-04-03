@@ -45,6 +45,9 @@ public sealed class ExcusalCreditRepository(RegistrationsDbContext db) : IExcusa
         return (items, total);
     }
 
+    public async Task<List<ExcusalCredit>> ListByIdsAsync(List<Guid> ids, CancellationToken ct = default)
+        => await db.ExcusalCredits.Where(x => ids.Contains(x.Id)).ToListAsync(ct);
+
     public async Task AddAsync(ExcusalCredit credit, CancellationToken ct = default)
         => await db.ExcusalCredits.AddAsync(credit, ct);
 

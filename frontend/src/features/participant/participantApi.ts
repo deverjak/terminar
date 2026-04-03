@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? '';
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
 
 function tenantHeaders(tenantSlug?: string): HeadersInit {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
@@ -14,7 +14,7 @@ export interface ParticipantSession {
   isPast: boolean;
   excusalDeadlineAt: string | null;
   canExcuse: boolean;
-  excusalStatus: 'Excused' | 'CreditIssued' | null;
+  excusalStatus: 'Excused' | 'CreditActive' | 'CreditRedeemed' | 'CreditCancelled' | 'CreditExpired' | null;
 }
 
 export interface ParticipantCourseView {

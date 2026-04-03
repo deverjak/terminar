@@ -33,8 +33,9 @@ public sealed class CreateExcusalCommandHandler(
         var session = course.Sessions.FirstOrDefault(s => s.Id == request.SessionId)
             ?? throw new Terminar.SharedKernel.NotFoundException("Session not found.");
 
+        var tenantId = TenantId.From(request.TenantId);
         var tenantRecord = await tenantsDb.Tenants
-            .FirstOrDefaultAsync(t => t.Id.Value == request.TenantId, cancellationToken);
+            .FirstOrDefaultAsync(t => t.Id == tenantId, cancellationToken);
         var deadlineHours = tenantRecord?.ExcusalSettings.ExcusalDeadlineHours ?? 24;
         var deadline = session.ScheduledAt.AddHours(-deadlineHours);
         var now = DateTime.UtcNow;
@@ -49,7 +50,6 @@ public sealed class CreateExcusalCommandHandler(
         if (isDuplicate)
             throw new Terminar.SharedKernel.ConflictException("Already excused from this session.");
 
-        var tenantId = TenantId.From(request.TenantId);
         var excusal = Excusal.Create(tenantId, registration.Id, registration.CourseId, request.SessionId,
             registration.ParticipantEmail.Value, registration.ParticipantName);
 

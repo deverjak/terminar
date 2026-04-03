@@ -2,12 +2,14 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Terminar.Modules.Courses.Infrastructure;
 using Terminar.Modules.Registrations.Domain.Events;
+using Terminar.Modules.Tenants.Infrastructure;
 
 namespace Terminar.Api.Notifications;
 
 public sealed class RegistrationCreatedEmailHandler(
     IEmailNotificationService emailService,
     CoursesDbContext coursesDb,
+    TenantsDbContext tenantsDb,
     IConfiguration configuration,
     ILogger<RegistrationCreatedEmailHandler> logger)
     : INotificationHandler<RegistrationCreated>
@@ -28,8 +30,12 @@ public sealed class RegistrationCreatedEmailHandler(
                 return;
             }
 
+            var tenant = await tenantsDb.Tenants
+                .FirstOrDefaultAsync(t => t.Id == notification.TenantId, cancellationToken);
+
             var baseUrl = configuration["App:BaseUrl"] ?? "http://localhost:5173";
-            var safeLinkUrl = $"{baseUrl}/participant/course/{notification.SafeLinkToken}";
+            var tenantParam = tenant is not null ? $"?tenant={tenant.Slug}" : string.Empty;
+            var safeLinkUrl = $"{baseUrl}/participant/course/{notification.SafeLinkToken}{tenantParam}";
 
             var sessions = course.Sessions
                 .OrderBy(s => s.ScheduledAt)
