@@ -11,6 +11,7 @@ interface StatusBadgeProps {
 const courseStatusColors: Record<string, string> = {
   Draft: 'gray',
   Active: 'green',
+  Ended: 'orange',
   Cancelled: 'red',
   Completed: 'blue',
 };

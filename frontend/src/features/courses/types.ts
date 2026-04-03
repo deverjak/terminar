@@ -12,6 +12,24 @@ export interface CourseListItem {
   status: CourseStatus;
   sessionCount: number;
   firstSessionAt: string | null;
+  lastSessionEndsAt: string | null;
+  tags: string[];
+}
+
+export type TemporalBucket = 'all' | 'upcoming' | 'ongoing' | 'past';
+export type SortField = 'title' | 'firstSessionAt' | 'capacity';
+export type SortDirection = 'asc' | 'desc';
+
+export type DisplayStatus = CourseStatus | 'Ended';
+
+export interface CourseFilters {
+  temporalBucket: TemporalBucket;
+  search: string;
+  statuses: DisplayStatus[];
+  courseType: CourseType | null;
+  tags: string[];
+  sortField: SortField;
+  sortDirection: SortDirection;
 }
 
 export interface SessionDetail {

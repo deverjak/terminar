@@ -18,6 +18,8 @@ public sealed class ListCoursesHandler(ICourseRepository repository) : IRequestH
             c.Capacity,
             c.Status,
             c.Sessions.Count,
-            c.Sessions.MinBy(s => s.ScheduledAt)?.ScheduledAt)).ToList();
+            c.Sessions.MinBy(s => s.ScheduledAt)?.ScheduledAt,
+            c.Sessions.MaxBy(s => s.ScheduledAt)?.EndsAt,
+            c.ExcusalPolicy.Tags)).ToList();
     }
 }
