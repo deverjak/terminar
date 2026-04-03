@@ -11,6 +11,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-03
 - PostgreSQL via EF Core (existing); new tables in `registrations`, `courses`, `tenants` schemas (004-enrollment-email-excusals)
 - C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x (backend); Mantine v9, TanStack Query v5, react-i18next (frontend) (005-courses-filtering-pagination)
 - PostgreSQL via EF Core 10 — no new tables or migrations required (005-courses-filtering-pagination)
+- C# 14 / .NET 10 (backend), TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql) | Mantine v9, TanStack Query v5, react-i18next (006-participant-custom-fields)
+- PostgreSQL via EF Core — **3 new tables** with **3 new migrations** (one per module) (006-participant-custom-fields)
 
 - C# 14 / .NET 10 + ASP.NET Core 10 (Minimal APIs), ASP.NET Core Identity (Infrastructure only), MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), .NET Aspire (9.x latest stable), StronglyTypedId 2.x (001-course-reservation-system)
 
@@ -63,9 +65,9 @@ dotnet user-jwts create --role Staff
 - Minimal APIs in `Terminar.Api` — route registration only, delegate to MediatR commands/queries
 
 ## Recent Changes
+- 006-participant-custom-fields: Added C# 14 / .NET 10 (backend), TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql) | Mantine v9, TanStack Query v5, react-i18next
 - 005-courses-filtering-pagination: Added C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x (backend); Mantine v9, TanStack Query v5, react-i18next (frontend)
 - 004-enrollment-email-excusals: Added C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), MailKit + MimeKit (new), React 19, Mantine v9, TanStack Query v5, react-i18next
-- 003-recurrent-course-creation: Added TypeScript 5.x, C# 14 / .NET 10 + React 19, Mantine v9, TanStack Query v5, react-i18next, React Router v7, Vite 6
 
 
 <!-- MANUAL ADDITIONS START -->
