@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Container, Title, Stack, Switch, NumberInput, Button, Divider, Text, Group, TextInput, Table, Modal } from '@mantine/core';
+import { Container, Title, Stack, Switch, NumberInput, Button, Divider, Group, TextInput, Table, Modal } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import { notifications } from '@mantine/notifications';
 import { useDisclosure } from '@mantine/hooks';

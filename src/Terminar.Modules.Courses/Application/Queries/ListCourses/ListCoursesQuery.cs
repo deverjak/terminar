@@ -12,6 +12,8 @@ public sealed record CourseListItem(
     int Capacity,
     CourseStatus Status,
     int SessionCount,
-    DateTime? FirstSessionAt);
+    DateTime? FirstSessionAt,
+    DateTime? LastSessionEndsAt,
+    List<string> Tags);
 
 public sealed record ListCoursesQuery(Guid TenantId) : IRequest<List<CourseListItem>>;
