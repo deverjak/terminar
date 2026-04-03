@@ -10,6 +10,7 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
 {
     public DbSet<Tenant> Tenants => Set<Tenant>();
     public DbSet<ExcusalValidityWindow> ExcusalValidityWindows => Set<ExcusalValidityWindow>();
+    public DbSet<CustomFieldDefinition> CustomFieldDefinitions => Set<CustomFieldDefinition>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,6 +37,20 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
                 s.Property(x => x.UnenrollmentDeadlineDays).HasColumnName("excusal_unenrollment_deadline_days").HasDefaultValue(14);
                 s.Property(x => x.ExcusalDeadlineHours).HasColumnName("excusal_deadline_hours").HasDefaultValue(24);
             });
+        });
+
+        modelBuilder.Entity<CustomFieldDefinition>(e =>
+        {
+            e.ToTable("custom_field_definitions");
+            e.HasKey(x => x.Id);
+            e.Property(x => x.TenantId)
+                .HasConversion(v => v.Value, v => TenantId.From(v));
+            e.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            e.Property(x => x.FieldType).HasConversion<string>().HasMaxLength(20).IsRequired();
+            e.Property(x => x.AllowedValues).HasColumnType("text[]");
+            e.Property(x => x.DisplayOrder).HasDefaultValue(0);
+            e.Property(x => x.CreatedAt);
+            e.HasIndex(x => new { x.TenantId, x.Name }).IsUnique();
         });
 
         modelBuilder.Entity<ExcusalValidityWindow>(e =>

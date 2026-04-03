@@ -1,5 +1,5 @@
 {
-  "nav": { "courses": "Kurzy", "staff": "Personál", "logout": "Odhlásit se", "excusalCredits": "Omluvenky", "excusalSettings": "Nastavení omluvenek" },
+  "nav": { "courses": "Kurzy", "staff": "Personál", "logout": "Odhlásit se", "excusalCredits": "Omluvenky", "excusalSettings": "Nastavení omluvenek", "customFieldsSettings": "Vlastní pole" },
   "landing": { "title": "Termínář", "tagline": "Správa kurzů pro vaši organizaci", "createWorkspace": "Vytvořit pracovní prostor", "login": "Přihlásit se" },
   "auth": { "login": "Přihlásit se", "email": "E-mail", "password": "Heslo", "loginButton": "Přihlásit se", "invalidCredentials": "Neplatné přihlašovací údaje. Zkuste to znovu.", "loggingIn": "Přihlašování..." },
   "tenants": { "register": "Vytvořit pracovní prostor", "orgName": "Název organizace", "orgNamePlaceholder": "Acme s.r.o.", "slug": "Identifikátor pracovního prostoru", "slugHint": "Malá písmena, číslice, pomlčky. 3–63 znaků.", "language": "Výchozí jazyk", "langEn": "Angličtina", "langCs": "Čeština", "adminUsername": "Uživatelské jméno správce", "adminEmail": "E-mail správce", "adminPassword": "Heslo správce", "confirmPassword": "Potvrdit heslo", "passwordMismatch": "Hesla se neshodují", "creating": "Vytváření pracovního prostoru...", "slugTaken": "Tento identifikátor pracovního prostoru je již obsazen.", "createButton": "Vytvořit pracovní prostor" },
@@ -46,7 +46,8 @@
     "statuses": { "Confirmed": "Potvrzeno", "Cancelled": "Zrušeno" },
     "filter": { "all": "Vše", "confirmed": "Potvrzeno", "cancelled": "Zrušeno" },
     "form": { "participantName": "Jméno účastníka", "participantEmail": "E-mail účastníka", "submitButton": "Přidat přihlášku", "fullCapacity": "Tento kurz je plně obsazen." },
-    "cancelConfirm": "Zrušit tuto přihlášku?", "cancelSuccess": "Přihláška byla zrušena.", "addSuccess": "Přihláška byla přidána."
+    "cancelConfirm": "Zrušit tuto přihlášku?", "cancelSuccess": "Přihláška byla zrušena.", "addSuccess": "Přihláška byla přidána.",
+    "fieldValue": { "notSet": "—", "saveError": "Nepodařilo se uložit hodnotu pole.", "yesLabel": "Ano", "noLabel": "Ne", "summary": "{{set}} / {{total}}" }
   },
   "staff": {
     "title": "Personál", "addStaff": "Přidat uživatele", "noStaff": "Zatím žádní uživatelé personálu.",
@@ -106,6 +107,38 @@
       "confirmButton": "Potvrdit využití",
       "cancelButton": "Zrušit",
       "success": "Omluvenka využita. Nyní jste přihlášeni na náhradní kurz."
+    }
+  },
+  "customFields": {
+    "title": "Vlastní pole",
+    "addField": "Přidat pole",
+    "editField": "Upravit pole",
+    "deleteField": "Smazat pole",
+    "fieldName": "Název pole",
+    "fieldType": "Typ pole",
+    "allowedValues": "Možnosti (jedna na řádek)",
+    "typeYesNo": "Ano / Ne",
+    "typeText": "Text",
+    "typeOptionsList": "Seznam možností",
+    "displayOrder": "Pořadí zobrazení",
+    "noFields": "Zatím nejsou definována žádná vlastní pole.",
+    "noFieldsHint": "Přidejte pole pro sledování dat specifických pro účastníky, například stav platby.",
+    "deleteConfirm": "Smazat toto vlastní pole? Stávající hodnoty budou odstraněny ze všech seznamů účastníků.",
+    "nameDuplicate": "Pole s tímto názvem již existuje.",
+    "createSuccess": "Vlastní pole vytvořeno.",
+    "updateSuccess": "Vlastní pole aktualizováno.",
+    "deleteSuccess": "Vlastní pole smazáno.",
+    "columns": {
+      "name": "Název",
+      "type": "Typ",
+      "allowedValues": "Možnosti",
+      "actions": "Akce"
+    },
+    "course": {
+      "sectionTitle": "Vlastní pole",
+      "enabledToggleLabel": "Povolit pro tento kurz",
+      "noFieldsDefined": "Zatím nejsou definována žádná vlastní pole. Přejděte do Nastavení pracovního prostoru a přidejte pole.",
+      "saveSuccess": "Přiřazení polí uloženo."
     }
   },
   "excusalAdmin": {

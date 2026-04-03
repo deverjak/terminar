@@ -88,6 +88,7 @@ app.MapDefaultEndpoints();
 app.MapTenantsEndpoints();
 app.MapIdentityEndpoints();
 app.MapCoursesEndpoints();
+app.MapCustomFieldsEndpoints();
 app.MapRegistrationsEndpoints();
 app.MapParticipantsEndpoints();
 app.MapExcusalCreditsEndpoints();

@@ -16,6 +16,7 @@ import ParticipantPortalRequestPage from '@/features/participant/ParticipantPort
 import ParticipantPortalPage from '@/features/participant/ParticipantPortalPage';
 import ExcusalCreditsPage from '@/features/excusal-credits/ExcusalCreditsPage';
 import ExcusalSettingsPage from '@/features/settings/excusal/ExcusalSettingsPage';
+import CustomFieldsSettingsPage from '@/features/settings/CustomFieldsSettingsPage';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: 'settings/excusal',
         element: <ExcusalSettingsPage />,
+      },
+      {
+        path: 'settings/custom-fields',
+        element: <CustomFieldsSettingsPage />,
       },
     ],
   },

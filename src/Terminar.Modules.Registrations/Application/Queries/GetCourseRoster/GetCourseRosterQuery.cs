@@ -15,10 +15,20 @@ public sealed record RegistrationDto(
     string ParticipantEmail,
     string RegistrationSource,
     string Status,
-    DateTime RegisteredAt);
+    DateTime RegisteredAt,
+    Dictionary<Guid, string?> CustomFieldValues);
+
+public sealed record EnabledCustomFieldDto(
+    Guid FieldDefinitionId,
+    string Name,
+    string FieldType,
+    List<string> AllowedValues,
+    int DisplayOrder);
 
 public sealed record GetCourseRosterResult(
     IReadOnlyList<RegistrationDto> Items,
     int Total,
     int Page,
-    int PageSize);
+    int PageSize,
+    IReadOnlyList<EnabledCustomFieldDto> EnabledCustomFields,
+    Dictionary<Guid, int> FieldValueSummary);

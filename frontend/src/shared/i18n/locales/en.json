@@ -1,5 +1,5 @@
 {
-  "nav": { "courses": "Courses", "staff": "Staff", "logout": "Log out", "excusalCredits": "Excusal Credits", "excusalSettings": "Excusal Settings" },
+  "nav": { "courses": "Courses", "staff": "Staff", "logout": "Log out", "excusalCredits": "Excusal Credits", "excusalSettings": "Excusal Settings", "customFieldsSettings": "Custom Fields" },
   "landing": { "title": "Termínář", "tagline": "Course management for your organization", "createWorkspace": "Create your workspace", "login": "Log in" },
   "auth": { "login": "Log in", "email": "Email", "password": "Password", "loginButton": "Log in", "invalidCredentials": "Invalid credentials. Please try again.", "loggingIn": "Logging in..." },
   "tenants": { "register": "Create workspace", "orgName": "Organization name", "orgNamePlaceholder": "Acme Corp", "slug": "Workspace identifier", "slugHint": "Lowercase letters, digits, hyphens. 3–63 characters.", "language": "Default language", "langEn": "English", "langCs": "Czech", "adminUsername": "Admin username", "adminEmail": "Admin email", "adminPassword": "Admin password", "confirmPassword": "Confirm password", "passwordMismatch": "Passwords do not match", "creating": "Creating workspace...", "slugTaken": "This workspace identifier is already taken.", "createButton": "Create workspace" },
@@ -46,7 +46,8 @@
     "statuses": { "Confirmed": "Confirmed", "Cancelled": "Cancelled" },
     "filter": { "all": "All", "confirmed": "Confirmed", "cancelled": "Cancelled" },
     "form": { "participantName": "Participant name", "participantEmail": "Participant email", "submitButton": "Add registration", "fullCapacity": "This course is at full capacity." },
-    "cancelConfirm": "Cancel this registration?", "cancelSuccess": "Registration cancelled.", "addSuccess": "Registration added."
+    "cancelConfirm": "Cancel this registration?", "cancelSuccess": "Registration cancelled.", "addSuccess": "Registration added.",
+    "fieldValue": { "notSet": "—", "saveError": "Failed to save field value.", "yesLabel": "Yes", "noLabel": "No", "summary": "{{set}} / {{total}}" }
   },
   "staff": {
     "title": "Staff", "addStaff": "Add Staff User", "noStaff": "No staff users yet.",
@@ -106,6 +107,38 @@
       "confirmButton": "Confirm redemption",
       "cancelButton": "Cancel",
       "success": "Credit redeemed. You are now enrolled in the makeup course."
+    }
+  },
+  "customFields": {
+    "title": "Custom Fields",
+    "addField": "Add Field",
+    "editField": "Edit Field",
+    "deleteField": "Delete Field",
+    "fieldName": "Field name",
+    "fieldType": "Field type",
+    "allowedValues": "Options (one per line)",
+    "typeYesNo": "Yes / No",
+    "typeText": "Text",
+    "typeOptionsList": "Options list",
+    "displayOrder": "Display order",
+    "noFields": "No custom fields defined yet.",
+    "noFieldsHint": "Add fields to track participant-specific data like payment status.",
+    "deleteConfirm": "Delete this custom field? Existing values will be removed from all participant lists.",
+    "nameDuplicate": "A field with this name already exists.",
+    "createSuccess": "Custom field created.",
+    "updateSuccess": "Custom field updated.",
+    "deleteSuccess": "Custom field deleted.",
+    "columns": {
+      "name": "Name",
+      "type": "Type",
+      "allowedValues": "Options",
+      "actions": "Actions"
+    },
+    "course": {
+      "sectionTitle": "Custom Fields",
+      "enabledToggleLabel": "Enable for this course",
+      "noFieldsDefined": "No custom fields have been defined yet. Go to Tenant Settings to add fields.",
+      "saveSuccess": "Field assignments saved."
     }
   },
   "excusalAdmin": {

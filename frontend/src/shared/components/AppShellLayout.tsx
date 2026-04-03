@@ -79,6 +79,14 @@ export function AppShellLayout() {
               leftSection={<IconSettings size={16} />}
             />
           )}
+          {session?.role === 'Admin' && (
+            <NavLink
+              component={Link}
+              to="/app/settings/custom-fields"
+              label={t('nav.customFieldsSettings')}
+              leftSection={<IconSettings size={16} />}
+            />
+          )}
         </Stack>
       </AppShell.Navbar>
 

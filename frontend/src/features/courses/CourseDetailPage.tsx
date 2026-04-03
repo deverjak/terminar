@@ -16,6 +16,7 @@ import { useAuth } from '@/features/auth/useAuth';
 import { ApiError } from '@/shared/api/client';
 import { useState } from 'react';
 import { CourseExcusalPolicySection } from './components/CourseExcusalPolicySection';
+import { CourseCustomFieldsSection } from './CourseCustomFieldsSection';
 
 export function CourseDetailPage() {
   const { t } = useTranslation();
@@ -167,6 +168,8 @@ export function CourseDetailPage() {
           </Table>
         )}
       </div>
+
+      <CourseCustomFieldsSection courseId={id!} />
 
       {isEditable && session?.role === 'Admin' && (
         <CourseExcusalPolicySection courseId={id!} />

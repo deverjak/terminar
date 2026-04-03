@@ -18,6 +18,7 @@ public static class TenantsModule
 
         services.AddScoped<ITenantRepository, TenantRepository>();
         services.AddScoped<IExcusalValidityWindowRepository, ExcusalValidityWindowRepository>();
+        services.AddScoped<ICustomFieldDefinitionRepository, CustomFieldDefinitionRepository>();
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(TenantsModule).Assembly));

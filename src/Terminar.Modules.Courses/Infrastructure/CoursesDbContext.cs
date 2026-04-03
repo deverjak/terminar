@@ -9,6 +9,7 @@ public sealed class CoursesDbContext(DbContextOptions<CoursesDbContext> options,
 {
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<Session> Sessions => Set<Session>();
+    public DbSet<CourseFieldAssignment> CourseFieldAssignments => Set<CourseFieldAssignment>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +32,11 @@ public sealed class CoursesDbContext(DbContextOptions<CoursesDbContext> options,
                 .HasForeignKey("CourseId")
                 .OnDelete(DeleteBehavior.Cascade);
 
+            e.HasMany(x => x.CustomFieldAssignments)
+                .WithOne()
+                .HasForeignKey(a => a.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             e.Ignore(x => x.DomainEvents);
 
             e.OwnsOne(c => c.ExcusalPolicy, p =>
@@ -41,6 +47,16 @@ public sealed class CoursesDbContext(DbContextOptions<CoursesDbContext> options,
                     .HasColumnName("excusal_tags")
                     .HasColumnType("text[]");
             });
+        });
+
+        modelBuilder.Entity<CourseFieldAssignment>(e =>
+        {
+            e.ToTable("course_field_assignments");
+            e.HasKey(x => x.Id);
+            e.Property(x => x.CourseId).IsRequired();
+            e.Property(x => x.FieldDefinitionId).IsRequired();
+            e.Property(x => x.DisplayOrder).HasDefaultValue(0);
+            e.HasIndex(x => new { x.CourseId, x.FieldDefinitionId }).IsUnique();
         });
 
         modelBuilder.Entity<Session>(e =>

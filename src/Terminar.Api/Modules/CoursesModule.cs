@@ -5,6 +5,7 @@ using Terminar.Modules.Courses.Application.Commands.CancelCourse;
 using Terminar.Modules.Courses.Application.Commands.CreateCourse;
 using Terminar.Modules.Courses.Application.Commands.UpdateCourse;
 using Terminar.Modules.Courses.Application.Commands.UpdateCourseExcusalPolicy;
+using Terminar.Modules.Courses.Application.CustomFields;
 using Terminar.Modules.Courses.Application.Queries.GetCourse;
 using Terminar.Modules.Courses.Application.Queries.GetCourseExcusalPolicy;
 using Terminar.Modules.Courses.Application.Queries.ListCourses;
@@ -117,6 +118,31 @@ public static class CoursesModule
             return Results.Ok();
         });
 
+        // GET /api/v1/courses/{courseId}/custom-fields
+        group.MapGet("/{courseId:guid}/custom-fields", async (
+            Guid courseId,
+            ITenantContext tenantCtx,
+            IMediator mediator,
+            CancellationToken ct) =>
+        {
+            var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
+            var result = await mediator.Send(new GetCourseCustomFieldsQuery(courseId, tenantId.Value), ct);
+            return Results.Ok(result);
+        });
+
+        // PUT /api/v1/courses/{courseId}/custom-fields
+        group.MapPut("/{courseId:guid}/custom-fields", async (
+            Guid courseId,
+            [FromBody] UpdateCourseCustomFieldsRequest req,
+            ITenantContext tenantCtx,
+            IMediator mediator,
+            CancellationToken ct) =>
+        {
+            var tenantId = tenantCtx.TenantId ?? throw new UnauthorizedAccessException("Tenant not resolved.");
+            await mediator.Send(new UpdateCourseCustomFieldsCommand(courseId, tenantId.Value, req.EnabledFieldIds), ct);
+            return Results.NoContent();
+        });
+
         return app;
     }
 
@@ -145,3 +171,5 @@ public sealed record UpdateCourseRequest(
     RegistrationMode? RegistrationMode);
 
 public sealed record UpdateCourseExcusalPolicyRequest(bool? CreditGenerationOverride, bool? ClearOverride, Guid? ValidityWindowId, bool? ClearWindow, List<string>? Tags);
+
+public sealed record UpdateCourseCustomFieldsRequest(List<Guid> EnabledFieldIds);
