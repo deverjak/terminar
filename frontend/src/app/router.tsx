@@ -11,6 +11,11 @@ import { EditCoursePage } from '@/features/courses/EditCoursePage';
 import { CourseRosterPage } from '@/features/registrations/CourseRosterPage';
 import { StaffListPage } from '@/features/staff/StaffListPage';
 import { NotFoundPage } from '@/shared/components/NotFoundPage';
+import ParticipantCourseViewPage from '@/features/participant/ParticipantCourseViewPage';
+import ParticipantPortalRequestPage from '@/features/participant/ParticipantPortalRequestPage';
+import ParticipantPortalPage from '@/features/participant/ParticipantPortalPage';
+import ExcusalCreditsPage from '@/features/excusal-credits/ExcusalCreditsPage';
+import ExcusalSettingsPage from '@/features/settings/excusal/ExcusalSettingsPage';
 
 export const router = createBrowserRouter([
   {
@@ -61,7 +66,27 @@ export const router = createBrowserRouter([
         path: 'staff',
         element: <StaffListPage />,
       },
+      {
+        path: 'excusal-credits',
+        element: <ExcusalCreditsPage />,
+      },
+      {
+        path: 'settings/excusal',
+        element: <ExcusalSettingsPage />,
+      },
     ],
+  },
+  {
+    path: '/participant',
+    element: <ParticipantPortalRequestPage />,
+  },
+  {
+    path: '/participant/portal',
+    element: <ParticipantPortalPage />,
+  },
+  {
+    path: '/participant/course/:safeLinkToken',
+    element: <ParticipantCourseViewPage />,
   },
   {
     path: '*',

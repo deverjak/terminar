@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Terminar.Modules.Tenants.Domain.Repositories;
 using Terminar.Modules.Tenants.Infrastructure.Repositories;
 
+
 namespace Terminar.Modules.Tenants.Infrastructure;
 
 public static class TenantsModule
@@ -16,6 +17,7 @@ public static class TenantsModule
             options.UseNpgsql(connectionString));
 
         services.AddScoped<ITenantRepository, TenantRepository>();
+        services.AddScoped<IExcusalValidityWindowRepository, ExcusalValidityWindowRepository>();
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(TenantsModule).Assembly));

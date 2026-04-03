@@ -9,6 +9,7 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
     : DbContext(options)
 {
     public DbSet<Tenant> Tenants => Set<Tenant>();
+    public DbSet<ExcusalValidityWindow> ExcusalValidityWindows => Set<ExcusalValidityWindow>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,6 +28,27 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
             entity.Property(t => t.DefaultLanguageCode).HasColumnName("default_language_code").HasMaxLength(5).IsRequired();
             entity.Property(t => t.Status).HasColumnName("status").HasConversion<string>();
             entity.Property(t => t.CreatedAt).HasColumnName("created_at");
+            entity.Ignore(t => t.DomainEvents);
+            entity.OwnsOne(t => t.ExcusalSettings, s =>
+            {
+                s.Property(x => x.CreditGenerationEnabled).HasColumnName("excusal_credit_generation_enabled").HasDefaultValue(false);
+                s.Property(x => x.ForwardWindowCount).HasColumnName("excusal_forward_window_count").HasDefaultValue(2);
+                s.Property(x => x.UnenrollmentDeadlineDays).HasColumnName("excusal_unenrollment_deadline_days").HasDefaultValue(14);
+                s.Property(x => x.ExcusalDeadlineHours).HasColumnName("excusal_deadline_hours").HasDefaultValue(24);
+            });
+        });
+
+        modelBuilder.Entity<ExcusalValidityWindow>(e =>
+        {
+            e.HasKey(x => x.Id);
+            e.Property(x => x.TenantId).HasConversion(v => v.Value, v => TenantId.From(v));
+            e.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            e.HasIndex(x => new { x.TenantId, x.Name }).IsUnique().HasFilter("deleted_at IS NULL");
+            e.Property(x => x.CreatedAt).HasColumnName("created_at");
+            e.Property(x => x.DeletedAt).HasColumnName("deleted_at");
+            e.HasQueryFilter(x => x.DeletedAt == null);
+            e.Ignore(x => x.DomainEvents);
+            e.Ignore(x => x.IsDeleted);
         });
     }
 
@@ -39,14 +61,15 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
 
     private async Task DispatchDomainEventsAsync(CancellationToken cancellationToken)
     {
-        var aggregates = ChangeTracker.Entries<Terminar.SharedKernel.AggregateRoot<TenantId>>()
+        var tenantEvents = ChangeTracker.Entries<Terminar.SharedKernel.AggregateRoot<TenantId>>()
             .Where(e => e.Entity.DomainEvents.Count != 0)
-            .Select(e => e.Entity)
+            .SelectMany(e => e.Entity.ClearDomainEvents())
             .ToList();
-
-        var events = aggregates.SelectMany(a => a.ClearDomainEvents()).ToList();
-
-        foreach (var @event in events)
+        var guidEvents = ChangeTracker.Entries<Terminar.SharedKernel.AggregateRoot<Guid>>()
+            .Where(e => e.Entity.DomainEvents.Count != 0)
+            .SelectMany(e => e.Entity.ClearDomainEvents())
+            .ToList();
+        foreach (var @event in tenantEvents.Concat(guidEvents))
             await mediator.Publish(@event, cancellationToken);
     }
 }

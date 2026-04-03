@@ -43,7 +43,7 @@ public static class RegistrationsModule
                     registration_source = result.RegistrationSource,
                     status = result.Status,
                     registered_at = result.RegisteredAt,
-                    cancellation_token = result.SelfCancellationToken
+                    safe_link_token = result.SafeLinkToken
                 });
         }).AllowAnonymous().WithTags("Registrations");
 

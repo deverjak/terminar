@@ -3,7 +3,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useMantineColorScheme } from '@mantine/core';
 import { Outlet, Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { IconSun, IconMoon, IconBook, IconUsers } from '@tabler/icons-react';
+import { IconSun, IconMoon, IconBook, IconUsers, IconCertificate, IconSettings } from '@tabler/icons-react';
 import { useAuth } from '@/features/auth/useAuth';
 
 export function AppShellLayout() {
@@ -63,6 +63,20 @@ export function AppShellLayout() {
               to="/app/staff"
               label={t('nav.staff')}
               leftSection={<IconUsers size={16} />}
+            />
+          )}
+          <NavLink
+            component={Link}
+            to="/app/excusal-credits"
+            label={t('nav.excusalCredits')}
+            leftSection={<IconCertificate size={16} />}
+          />
+          {session?.role === 'Admin' && (
+            <NavLink
+              component={Link}
+              to="/app/settings/excusal"
+              label={t('nav.excusalSettings')}
+              leftSection={<IconSettings size={16} />}
             />
           )}
         </Stack>

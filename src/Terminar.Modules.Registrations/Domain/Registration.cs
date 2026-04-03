@@ -17,8 +17,8 @@ public sealed class Registration : AggregateRoot<Guid>
     public DateTime? CancelledAt { get; private set; }
     public string? CancellationReason { get; private set; }
 
-    /// <summary>Opaque token for self-cancellation via public endpoint.</summary>
-    public Guid SelfCancellationToken { get; private set; }
+    /// <summary>Opaque token used in safe links sent to participants for self-service actions.</summary>
+    public Guid SafeLinkToken { get; private set; }
 
     private Registration() { }
 
@@ -45,11 +45,12 @@ public sealed class Registration : AggregateRoot<Guid>
             RegisteredByStaffId = registeredByStaffId,
             Status = RegistrationStatus.Confirmed,
             RegisteredAt = now,
-            SelfCancellationToken = Guid.NewGuid()
+            SafeLinkToken = Guid.NewGuid()
         };
 
         reg.RaiseDomainEvent(new RegistrationCreated(
-            Guid.NewGuid(), now, reg.Id, reg.CourseId, reg.TenantId, reg.ParticipantEmail.Value));
+            Guid.NewGuid(), now, reg.Id, reg.CourseId, reg.TenantId,
+            reg.ParticipantEmail.Value, reg.ParticipantName, reg.SafeLinkToken));
 
         return reg;
     }
@@ -66,6 +67,8 @@ public sealed class Registration : AggregateRoot<Guid>
         CancelledAt = now;
         CancellationReason = reason;
 
-        RaiseDomainEvent(new RegistrationCancelled(Guid.NewGuid(), now, Id, CourseId, TenantId));
+        RaiseDomainEvent(new RegistrationCancelled(
+            Guid.NewGuid(), now, Id, CourseId, TenantId,
+            ParticipantEmail.Value, ParticipantName));
     }
 }

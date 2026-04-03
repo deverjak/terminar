@@ -30,7 +30,7 @@ namespace Terminar.Modules.Registrations.Infrastructure.Migrations
                     RegisteredAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CancelledAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CancellationReason = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    SelfCancellationToken = table.Column<Guid>(type: "uuid", nullable: false)
+                    SafeLinkToken = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {

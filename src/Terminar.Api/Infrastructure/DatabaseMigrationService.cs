@@ -25,6 +25,13 @@ public sealed class DatabaseMigrationService(IServiceProvider serviceProvider, I
         where TContext : DbContext
     {
         var context = scope.ServiceProvider.GetRequiredService<TContext>();
+
+        // Npgsql chicken-and-egg: the migrations history table lives in the module's schema,
+        // but that schema doesn't exist yet on a fresh database. Create it idempotently first.
+        var schema = context.Model.GetDefaultSchema();
+        if (schema is not null)
+            await context.Database.ExecuteSqlRawAsync($"CREATE SCHEMA IF NOT EXISTS \"{schema}\"", cancellationToken);
+
         await context.Database.MigrateAsync(cancellationToken);
         logger.LogInformation("Migrations applied for {Context}", typeof(TContext).Name);
     }

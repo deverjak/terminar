@@ -1,5 +1,5 @@
 {
-  "nav": { "courses": "Kurzy", "staff": "Personál", "logout": "Odhlásit se" },
+  "nav": { "courses": "Kurzy", "staff": "Personál", "logout": "Odhlásit se", "excusalCredits": "Omluvenky", "excusalSettings": "Nastavení omluvenek" },
   "landing": { "title": "Termínář", "tagline": "Správa kurzů pro vaši organizaci", "createWorkspace": "Vytvořit pracovní prostor", "login": "Přihlásit se" },
   "auth": { "login": "Přihlásit se", "email": "E-mail", "password": "Heslo", "loginButton": "Přihlásit se", "invalidCredentials": "Neplatné přihlašovací údaje. Zkuste to znovu.", "loggingIn": "Přihlašování..." },
   "tenants": { "register": "Vytvořit pracovní prostor", "orgName": "Název organizace", "orgNamePlaceholder": "Acme s.r.o.", "slug": "Identifikátor pracovního prostoru", "slugHint": "Malá písmena, číslice, pomlčky. 3–63 znaků.", "language": "Výchozí jazyk", "langEn": "Angličtina", "langCs": "Čeština", "adminUsername": "Uživatelské jméno správce", "adminEmail": "E-mail správce", "adminPassword": "Heslo správce", "confirmPassword": "Potvrdit heslo", "passwordMismatch": "Hesla se neshodují", "creating": "Vytváření pracovního prostoru...", "slugTaken": "Tento identifikátor pracovního prostoru je již obsazen.", "createButton": "Vytvořit pracovní prostor" },
@@ -54,5 +54,100 @@
     "form": { "username": "Uživatelské jméno", "email": "E-mail", "password": "Heslo", "role": "Role", "submitButton": "Vytvořit uživatele" },
     "accessDenied": "Pro správu personálu potřebujete oprávnění správce."
   },
-  "common": { "loading": "Načítání...", "save": "Uložit", "cancel": "Zrušit", "confirm": "Potvrdit", "back": "Zpět", "notFound": "Stránka nenalezena", "notFoundHint": "Stránka, kterou hledáte, neexistuje.", "backHome": "Zpět na hlavní stránku", "error": "Došlo k chybě. Zkuste to znovu.", "serverError": "Chyba serveru. Zkuste to prosím později.", "connectionError": "Chyba připojení. Zkontrolujte síťové připojení.", "required": "Toto pole je povinné.", "invalidEmail": "Zadejte platnou e-mailovou adresu." }
+  "common": { "loading": "Načítání...", "save": "Uložit", "cancel": "Zrušit", "confirm": "Potvrdit", "back": "Zpět", "notFound": "Stránka nenalezena", "notFoundHint": "Stránka, kterou hledáte, neexistuje.", "backHome": "Zpět na hlavní stránku", "error": "Došlo k chybě. Zkuste to znovu.", "serverError": "Chyba serveru. Zkuste to prosím později.", "connectionError": "Chyba připojení. Zkontrolujte síťové připojení.", "required": "Toto pole je povinné.", "invalidEmail": "Zadejte platnou e-mailovou adresu." },
+  "participant": {
+    "requestPage": {
+      "title": "Přístup k vašim kurzům",
+      "subtitle": "Zadejte svůj e-mail a my vám zašleme odkaz na vaše přihlášení.",
+      "emailLabel": "E-mailová adresa",
+      "submitButton": "Zaslat odkaz",
+      "successTitle": "Odkaz odeslán!",
+      "successMessage": "Pokud jsme nalezli vaše přihlášení, brzy obdržíte odkaz.",
+      "emailPlaceholder": "vas@email.cz"
+    },
+    "portal": {
+      "title": "Moje kurzy",
+      "enrollmentsSection": "Moje přihlášení",
+      "creditsSection": "Omluvenky",
+      "noEnrollments": "Žádná aktivní přihlášení.",
+      "noCredits": "Žádné omluvenky.",
+      "viewCourse": "Zobrazit kurz"
+    },
+    "courseView": {
+      "sessions": "Lekce",
+      "noSessions": "Žádné lekce nejsou naplánovány.",
+      "excuseButton": "Omluvit se z lekce",
+      "excusedLabel": "Omluveno",
+      "deadlinePassed": "Lhůta pro omluvu uplynula",
+      "unenrollButton": "Odhlásit se z kurzu",
+      "unenrollDeadlinePassed": "Lhůta pro odhlášení uplynula. Kontaktujte organizátora.",
+      "unenrollConfirmTitle": "Potvrdit odhlášení",
+      "unenrollConfirmBody": "Opravdu se chcete odhlásit z tohoto kurzu?",
+      "unenrollSuccess": "Úspěšně odhlášeno."
+    },
+    "excusalCredit": {
+      "validUntil": "Platnost do",
+      "tags": "Platí pro",
+      "redeemButton": "Využít na náhradní lekci",
+      "status": {
+        "Active": "Aktivní",
+        "Redeemed": "Využito",
+        "Expired": "Propadlé",
+        "Cancelled": "Zrušeno organizátorem"
+      }
+    },
+    "redeemModal": {
+      "title": "Využít omluvenku",
+      "selectCourse": "Vyberte náhradní kurz",
+      "confirmButton": "Potvrdit využití",
+      "cancelButton": "Zrušit",
+      "success": "Omluvenka využita. Nyní jste přihlášeni na náhradní kurz."
+    }
+  },
+  "excusalAdmin": {
+    "credits": {
+      "title": "Omluvenky",
+      "participant": "Účastník",
+      "sourceCourse": "Zdrojový kurz",
+      "sourceSession": "Lekce",
+      "tags": "Štítky",
+      "validUntil": "Platnost do",
+      "status": "Stav",
+      "actions": "Akce",
+      "editButton": "Upravit",
+      "deleteButton": "Zrušit omluvenku",
+      "deleteConfirmTitle": "Zrušit tuto omluvenku?",
+      "deleteConfirmBody": "Tato akce je nevratná.",
+      "editModal": {
+        "title": "Upravit omluvenku",
+        "addWindows": "Přidat okna platnosti",
+        "replaceTags": "Nahradit štítky (oddělené čárkou)",
+        "saveButton": "Uložit změny"
+      }
+    }
+  },
+  "excusalSettings": {
+    "title": "Nastavení omluvenek",
+    "creditGenerationEnabled": "Povolit generování omluvenek ve výchozím nastavení",
+    "forwardWindowCount": "Počet dopředných oken platnosti",
+    "unenrollmentDeadlineDays": "Lhůta pro odhlášení (dny před první lekcí)",
+    "excusalDeadlineHours": "Lhůta pro omluvu (hodiny před lekcí)",
+    "saveButton": "Uložit nastavení",
+    "windows": {
+      "title": "Okna platnosti",
+      "addButton": "Přidat okno",
+      "name": "Název okna",
+      "startDate": "Datum začátku",
+      "endDate": "Datum konce",
+      "deleteButton": "Smazat",
+      "deleteConfirm": "Smazat toto okno platnosti?"
+    },
+    "coursePolicy": {
+      "title": "Politika omluvenek kurzu",
+      "override": "Přepsat globální nastavení generování omluvenek",
+      "window": "Přiřazené okno platnosti",
+      "tags": "Štítky kurzu (oddělené čárkou)",
+      "saveButton": "Uložit politiku"
+    }
+  }
 }

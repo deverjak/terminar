@@ -1,12 +1,14 @@
 ﻿# terminar Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-01
+Auto-generated from all feature plans. Last updated: 2026-04-02
 
 ## Active Technologies
 - TypeScript 5.x, React 19, Node.js 22+ + Mantine v9, React Router v7, TanStack Query v5, react-i18next, Vite 6 (002-web-ui-frontend)
 - No database — all state via backend API; access token in memory, refresh token + tenant slug in localStorage (002-web-ui-frontend)
 - TypeScript 5.x, C# 14 / .NET 10 + React 19, Mantine v9, TanStack Query v5, react-i18next, React Router v7, Vite 6 (003-recurrent-course-creation)
 - No new storage — sessions are transient form state submitted to the existing backend API; backend uses PostgreSQL via EF Core (003-recurrent-course-creation)
+- C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), MailKit + MimeKit (new), React 19, Mantine v9, TanStack Query v5, react-i18next (004-enrollment-email-excusals)
+- PostgreSQL via EF Core (existing); new tables in `registrations`, `courses`, `tenants` schemas (004-enrollment-email-excusals)
 
 - C# 14 / .NET 10 + ASP.NET Core 10 (Minimal APIs), ASP.NET Core Identity (Infrastructure only), MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), .NET Aspire (9.x latest stable), StronglyTypedId 2.x (001-course-reservation-system)
 
@@ -59,10 +61,10 @@ dotnet user-jwts create --role Staff
 - Minimal APIs in `Terminar.Api` — route registration only, delegate to MediatR commands/queries
 
 ## Recent Changes
+- 004-enrollment-email-excusals: Added C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), MailKit + MimeKit (new), React 19, Mantine v9, TanStack Query v5, react-i18next
 - 003-recurrent-course-creation: Added TypeScript 5.x, C# 14 / .NET 10 + React 19, Mantine v9, TanStack Query v5, react-i18next, React Router v7, Vite 6
 - 002-web-ui-frontend: Added TypeScript 5.x, React 19, Node.js 22+ + Mantine v9, React Router v7, TanStack Query v5, react-i18next, Vite 6
 
-- 001-course-reservation-system: Added C# 14 / .NET 10 + ASP.NET Core 10 (Minimal APIs), MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), .NET Aspire (9.x latest stable), BCrypt.Net-Next 4.x, StronglyTypedId 2.x
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

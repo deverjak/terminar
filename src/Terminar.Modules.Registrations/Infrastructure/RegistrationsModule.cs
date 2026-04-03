@@ -18,6 +18,9 @@ public static class RegistrationsModule
         services.AddScoped<IRegistrationRepository, RegistrationRepository>();
         services.AddScoped<IRegistrationCountReader, RegistrationRepository>();
         services.AddScoped<RegistrationCapacityChecker>();
+        services.AddScoped<IParticipantMagicLinkRepository, ParticipantMagicLinkRepository>();
+        services.AddScoped<IExcusalRepository, ExcusalRepository>();
+        services.AddScoped<IExcusalCreditRepository, ExcusalCreditRepository>();
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(RegistrationsModule).Assembly));
