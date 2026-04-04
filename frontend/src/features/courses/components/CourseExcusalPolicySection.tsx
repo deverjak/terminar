@@ -5,6 +5,7 @@ import { notifications } from '@mantine/notifications';
 import { useState } from 'react';
 import { getCourseExcusalPolicy, updateCourseExcusalPolicy } from '@/features/settings/excusal/excusalSettingsApi';
 import { listWindows } from '@/features/settings/excusal/excusalSettingsApi';
+import { useActivePlugins } from '@/shared/plugins/useActivePlugins';
 
 interface CourseExcusalPolicySectionProps {
   courseId: string;
@@ -13,6 +14,11 @@ interface CourseExcusalPolicySectionProps {
 export function CourseExcusalPolicySection({ courseId }: CourseExcusalPolicySectionProps) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
+  const activePluginIds = useActivePlugins();
+
+  if (!activePluginIds.includes('excusals')) {
+    return null;
+  }
 
   const { data: policy, isLoading: policyLoading } = useQuery({
     queryKey: ['course-excusal-policy', courseId],

@@ -5,10 +5,12 @@ using Terminar.Api.Middleware;
 using Terminar.Api.Modules;
 using Terminar.Api.Notifications;
 using Terminar.Api.Pipeline;
+using Terminar.Api.Plugins;
 using Terminar.Modules.Courses.Infrastructure;
 using Terminar.Modules.Identity.Infrastructure;
 using Terminar.Modules.Registrations.Infrastructure;
 using Terminar.Modules.Tenants.Infrastructure;
+using Terminar.SharedKernel.Plugins;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,12 @@ builder.Services.AddRegistrationsModule(connectionString);
 
 // Tenant resolution
 builder.Services.AddScoped<ITenantContext, TenantContext>();
+
+// Plugin infrastructure
+builder.Services.AddSingleton<IPluginCatalog, InMemoryPluginCatalog>();
+builder.Services.AddSingleton<PluginGuardFilterFactory>();
+builder.Services.AddTerminarPlugin<ExcusalPlugin>();
+builder.Services.AddTerminarPlugin<PaymentsPlugin>();
 
 // SMTP settings
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
@@ -91,8 +99,8 @@ app.MapCoursesEndpoints();
 app.MapCustomFieldsEndpoints();
 app.MapRegistrationsEndpoints();
 app.MapParticipantsEndpoints();
-app.MapExcusalCreditsEndpoints();
-app.MapExcusalSettingsEndpoints();
+app.MapPluginsEndpoints();
+app.UseTerminarPlugins();
 
 app.MapGet("/health", () => Results.Ok(new { status = "healthy" })).AllowAnonymous();
 

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Terminar.Modules.Tenants.Domain.Repositories;
 using Terminar.Modules.Tenants.Infrastructure.Repositories;
+using Terminar.SharedKernel.Plugins;
 
 
 namespace Terminar.Modules.Tenants.Infrastructure;
@@ -19,6 +20,7 @@ public static class TenantsModule
         services.AddScoped<ITenantRepository, TenantRepository>();
         services.AddScoped<IExcusalValidityWindowRepository, ExcusalValidityWindowRepository>();
         services.AddScoped<ICustomFieldDefinitionRepository, CustomFieldDefinitionRepository>();
+        services.AddScoped<ITenantPluginActivationRepository, TenantPluginActivationRepository>();
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(TenantsModule).Assembly));
