@@ -11,6 +11,7 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
     public DbSet<Tenant> Tenants => Set<Tenant>();
     public DbSet<ExcusalValidityWindow> ExcusalValidityWindows => Set<ExcusalValidityWindow>();
     public DbSet<CustomFieldDefinition> CustomFieldDefinitions => Set<CustomFieldDefinition>();
+    public DbSet<TenantPluginActivation> TenantPluginActivations => Set<TenantPluginActivation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,6 +52,21 @@ public sealed class TenantsDbContext(DbContextOptions<TenantsDbContext> options,
             e.Property(x => x.DisplayOrder).HasDefaultValue(0);
             e.Property(x => x.CreatedAt);
             e.HasIndex(x => new { x.TenantId, x.Name }).IsUnique();
+        });
+
+        modelBuilder.Entity<TenantPluginActivation>(e =>
+        {
+            e.ToTable("tenant_plugin_activations");
+            e.HasKey(x => x.Id);
+            e.Property(x => x.TenantId)
+                .HasConversion(v => v.Value, v => TenantId.From(v))
+                .HasColumnName("tenant_id");
+            e.Property(x => x.PluginId).HasColumnName("plugin_id").HasMaxLength(64).IsRequired();
+            e.Property(x => x.IsEnabled).HasColumnName("is_enabled").IsRequired();
+            e.Property(x => x.EnabledAt).HasColumnName("enabled_at");
+            e.Property(x => x.DisabledAt).HasColumnName("disabled_at");
+            e.HasIndex(x => new { x.TenantId, x.PluginId }).IsUnique();
+            e.HasIndex(x => x.TenantId);
         });
 
         modelBuilder.Entity<ExcusalValidityWindow>(e =>

@@ -3,8 +3,10 @@ import { useDisclosure } from '@mantine/hooks';
 import { useMantineColorScheme } from '@mantine/core';
 import { Outlet, Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { IconSun, IconMoon, IconBook, IconUsers, IconCertificate, IconSettings } from '@tabler/icons-react';
+import { IconSun, IconMoon, IconBook, IconUsers, IconPuzzle } from '@tabler/icons-react';
 import { useAuth } from '@/features/auth/useAuth';
+import { useActivePlugins } from '@/shared/plugins/useActivePlugins';
+import { getContributionsForActivePlugins } from '@/shared/plugins/pluginRegistry';
 
 export function AppShellLayout() {
   const [opened, { toggle }] = useDisclosure();
@@ -12,6 +14,9 @@ export function AppShellLayout() {
   const { t, i18n } = useTranslation();
   const { session, logout } = useAuth();
   const navigate = useNavigate();
+  const activePluginIds = useActivePlugins();
+  const pluginContributions = getContributionsForActivePlugins(activePluginIds);
+  const pluginNavItems = pluginContributions.flatMap(p => p.navItems);
 
   const handleLogout = () => {
     logout();
@@ -65,26 +70,31 @@ export function AppShellLayout() {
               leftSection={<IconUsers size={16} />}
             />
           )}
-          <NavLink
-            component={Link}
-            to="/app/excusal-credits"
-            label={t('nav.excusalCredits')}
-            leftSection={<IconCertificate size={16} />}
-          />
-          {session?.role === 'Admin' && (
-            <NavLink
-              component={Link}
-              to="/app/settings/excusal"
-              label={t('nav.excusalSettings')}
-              leftSection={<IconSettings size={16} />}
-            />
-          )}
+          {pluginNavItems
+            .filter(item => !item.requiredRole || session?.role === item.requiredRole)
+            .map(item => (
+              <NavLink
+                key={item.path}
+                component={Link}
+                to={item.path}
+                label={t(item.labelKey)}
+                leftSection={<item.icon size={16} />}
+              />
+            ))}
           {session?.role === 'Admin' && (
             <NavLink
               component={Link}
               to="/app/settings/custom-fields"
               label={t('nav.customFieldsSettings')}
-              leftSection={<IconSettings size={16} />}
+              leftSection={<IconPuzzle size={16} />}
+            />
+          )}
+          {session?.role === 'Admin' && (
+            <NavLink
+              component={Link}
+              to="/app/settings/plugins"
+              label={t('nav.pluginsSettings')}
+              leftSection={<IconPuzzle size={16} />}
             />
           )}
         </Stack>

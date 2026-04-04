@@ -17,6 +17,8 @@ import ParticipantPortalPage from '@/features/participant/ParticipantPortalPage'
 import ExcusalCreditsPage from '@/features/excusal-credits/ExcusalCreditsPage';
 import ExcusalSettingsPage from '@/features/settings/excusal/ExcusalSettingsPage';
 import CustomFieldsSettingsPage from '@/features/settings/CustomFieldsSettingsPage';
+import { PluginsSettingsPage } from '@/features/plugins/PluginsSettingsPage';
+import { PluginGuard } from '@/shared/plugins/PluginGuard';
 
 export const router = createBrowserRouter([
   {
@@ -69,15 +71,27 @@ export const router = createBrowserRouter([
       },
       {
         path: 'excusal-credits',
-        element: <ExcusalCreditsPage />,
+        element: (
+          <PluginGuard pluginId="excusals">
+            <ExcusalCreditsPage />
+          </PluginGuard>
+        ),
       },
       {
         path: 'settings/excusal',
-        element: <ExcusalSettingsPage />,
+        element: (
+          <PluginGuard pluginId="excusals">
+            <ExcusalSettingsPage />
+          </PluginGuard>
+        ),
       },
       {
         path: 'settings/custom-fields',
         element: <CustomFieldsSettingsPage />,
+      },
+      {
+        path: 'settings/plugins',
+        element: <PluginsSettingsPage />,
       },
     ],
   },
