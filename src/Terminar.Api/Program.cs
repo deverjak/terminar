@@ -6,6 +6,7 @@ using Terminar.Api.Modules;
 using Terminar.Api.Notifications;
 using Terminar.Api.Pipeline;
 using Terminar.Api.Plugins;
+using Terminar.Api.Services;
 using Terminar.Modules.Courses.Infrastructure;
 using Terminar.Modules.Identity.Infrastructure;
 using Terminar.Modules.Registrations.Infrastructure;
@@ -48,6 +49,9 @@ builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"
 
 // Email notifications (SMTP)
 builder.Services.AddScoped<IEmailNotificationService, SmtpEmailNotificationService>();
+
+// Export services
+builder.Services.AddScoped<ICsvExportService, CsvExportService>();
 
 // Background services
 builder.Services.AddHostedService<DatabaseMigrationService>();

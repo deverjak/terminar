@@ -21,6 +21,10 @@ export function setAuthStore(store: AuthStore) {
   authStore = store;
 }
 
+export function getDownloadToken(): string | null {
+  return authStore?.getSession()?.accessToken ?? null;
+}
+
 interface FetchOptions {
   method?: string;
   body?: unknown;

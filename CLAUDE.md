@@ -15,6 +15,7 @@ Auto-generated from all feature plans. Last updated: 2026-04-04
 - PostgreSQL via EF Core — **3 new tables** with **3 new migrations** (one per module) (006-participant-custom-fields)
 - C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql) | Mantine v9, TanStack Query v5, react-i18next, React Router v7 (007-plugin-architecture)
 - PostgreSQL via EF Core — **1 new table** with **1 new migration** in `Terminar.Modules.Tenants` + 1 data migration to auto-enable excusals for existing tenants (007-plugin-architecture)
+- C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, CsvHelper (new), Mantine v9, TanStack Query v5, react-i18next (008-course-data-export)
 
 - C# 14 / .NET 10 + ASP.NET Core 10 (Minimal APIs), ASP.NET Core Identity (Infrastructure only), MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql), .NET Aspire (9.x latest stable), StronglyTypedId 2.x (001-course-reservation-system)
 
@@ -67,9 +68,9 @@ dotnet user-jwts create --role Staff
 - Minimal APIs in `Terminar.Api` — route registration only, delegate to MediatR commands/queries
 
 ## Recent Changes
+- 008-course-data-export: Added C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, CsvHelper (new), Mantine v9, TanStack Query v5, react-i18next
 - 007-plugin-architecture: Added C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql) | Mantine v9, TanStack Query v5, react-i18next, React Router v7
 - 006-participant-custom-fields: Added C# 14 / .NET 10 (backend), TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x, FluentValidation 12.x, EF Core 10 (Npgsql) | Mantine v9, TanStack Query v5, react-i18next
-- 005-courses-filtering-pagination: Added C# 14 / .NET 10 (backend); TypeScript 5.x / React 19 (frontend) + ASP.NET Core 10 Minimal APIs, MediatR 12.x (backend); Mantine v9, TanStack Query v5, react-i18next (frontend)
 
 
 <!-- MANUAL ADDITIONS START -->

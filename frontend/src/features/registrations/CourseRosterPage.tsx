@@ -16,6 +16,7 @@ import {
 import { StatusBadge } from '@/shared/components/StatusBadge';
 import { ConfirmModal } from '@/shared/components/ConfirmModal';
 import { CreateRegistrationModal } from './CreateRegistrationModal';
+import { ExportRosterModal } from './ExportRosterModal';
 import { usePagination } from '@/shared/hooks/usePagination';
 import { ApiError } from '@/shared/api/client';
 
@@ -95,6 +96,7 @@ export function CourseRosterPage() {
   const { page, pageSize, setPage } = usePagination(20);
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [addModalOpen, { open: openAdd, close: closeAdd }] = useDisclosure(false);
+  const [exportOpen, { open: openExport, close: closeExport }] = useDisclosure(false);
   const [cancelTarget, setCancelTarget] = useState<string | null>(null);
   const [cancelling, setCancelling] = useState(false);
 
@@ -151,8 +153,15 @@ export function CourseRosterPage() {
 
       <Group justify="space-between" align="center">
         <Title order={2}>{t('registrations.title')}</Title>
-        <Button onClick={openAdd}>{t('registrations.addRegistration')}</Button>
+        <Group>
+          <Button variant="default" onClick={openExport}>{t('export.button')}</Button>
+          <Button onClick={openAdd}>{t('registrations.addRegistration')}</Button>
+        </Group>
       </Group>
+
+      {courseId && (
+        <ExportRosterModal opened={exportOpen} onClose={closeExport} courseId={courseId} />
+      )}
 
       <Select
         placeholder={t('registrations.filter.all')}
