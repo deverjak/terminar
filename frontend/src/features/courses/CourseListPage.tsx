@@ -15,6 +15,8 @@ import { useCoursesFilter } from './hooks/useCoursesFilter';
 import { usePagination } from '@/shared/hooks/usePagination';
 import type { SortField, DisplayStatus } from './types';
 import { useState } from 'react';
+import { useDisclosure } from '@mantine/hooks';
+import { ExportCoursesModal } from './ExportCoursesModal';
 
 const PAGE_SIZE = 25;
 
@@ -31,6 +33,7 @@ export function CourseListPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [view, setView] = useState<'list' | 'calendar'>('list');
+  const [exportOpened, { open: openExport, close: closeExport }] = useDisclosure(false);
 
   useEffect(() => {
     document.title = `${t('courses.title')} — Termínář`;
@@ -125,9 +128,12 @@ export function CourseListPage() {
               { label: t('courses.calendarView'), value: 'calendar' },
             ]}
           />
+          <Button variant="default" onClick={openExport}>{t('export.button')}</Button>
           <Button onClick={() => navigate('/app/courses/new')}>{t('courses.newCourse')}</Button>
         </Group>
       </Group>
+
+      <ExportCoursesModal opened={exportOpened} onClose={closeExport} />
 
       {view === 'calendar' ? (
         <CourseCalendarPage />

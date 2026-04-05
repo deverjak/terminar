@@ -164,6 +164,46 @@
       }
     }
   },
+  "export": {
+    "title": "Export CSV",
+    "button": "Export",
+    "download": "Download CSV",
+    "includeParticipants": "Include participants",
+    "dateFrom": "Start date from",
+    "dateTo": "Start date to",
+    "statusFilter": "Status",
+    "columns": {
+      "title": "Columns",
+      "selectAll": "Select all",
+      "deselectAll": "Deselect all",
+      "course_title": "Course name",
+      "course_status": "Status",
+      "course_first_session_at": "Start date",
+      "course_last_session_ends_at": "End date",
+      "course_location": "Location",
+      "course_capacity": "Capacity",
+      "course_enrolled_count": "Enrolled",
+      "course_waitlisted_count": "Waitlisted",
+      "course_type": "Course type",
+      "course_registration_mode": "Registration mode",
+      "course_description": "Description",
+      "participant_name": "Full name",
+      "participant_email": "Email",
+      "enrollment_status": "Enrollment status",
+      "enrollment_date": "Enrolled on",
+      "excusal_count": "Excusal count",
+      "custom_field": "Custom field"
+    },
+    "groups": {
+      "CourseInfo": "Course Info",
+      "ParticipantInfo": "Participant Info",
+      "CustomFields": "Custom Fields"
+    },
+    "validation": {
+      "noColumns": "Please select at least one column."
+    },
+    "empty": "No data matched the selected filters."
+  },
   "excusalSettings": {
     "title": "Excusal Settings",
     "creditGenerationEnabled": "Enable excusal credit generation by default",

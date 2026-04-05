@@ -164,6 +164,46 @@
       }
     }
   },
+  "export": {
+    "title": "Exportovat CSV",
+    "button": "Export",
+    "download": "Stáhnout CSV",
+    "includeParticipants": "Zahrnout účastníky",
+    "dateFrom": "Datum začátku od",
+    "dateTo": "Datum začátku do",
+    "statusFilter": "Stav",
+    "columns": {
+      "title": "Sloupce",
+      "selectAll": "Vybrat vše",
+      "deselectAll": "Zrušit výběr",
+      "course_title": "Název kurzu",
+      "course_status": "Stav",
+      "course_first_session_at": "Datum začátku",
+      "course_last_session_ends_at": "Datum konce",
+      "course_location": "Místo",
+      "course_capacity": "Kapacita",
+      "course_enrolled_count": "Přihlášeno",
+      "course_waitlisted_count": "Na čekací listině",
+      "course_type": "Typ kurzu",
+      "course_registration_mode": "Režim přihlašování",
+      "course_description": "Popis",
+      "participant_name": "Celé jméno",
+      "participant_email": "E-mail",
+      "enrollment_status": "Stav přihlášky",
+      "enrollment_date": "Datum přihlášení",
+      "excusal_count": "Počet omluvenek",
+      "custom_field": "Vlastní pole"
+    },
+    "groups": {
+      "CourseInfo": "Informace o kurzu",
+      "ParticipantInfo": "Informace o účastníkovi",
+      "CustomFields": "Vlastní pole"
+    },
+    "validation": {
+      "noColumns": "Vyberte alespoň jeden sloupec."
+    },
+    "empty": "Žádná data neodpovídají zvoleným filtrům."
+  },
   "excusalSettings": {
     "title": "Nastavení omluvenek",
     "creditGenerationEnabled": "Povolit generování omluvenek ve výchozím nastavení",

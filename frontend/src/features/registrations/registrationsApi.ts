@@ -1,4 +1,9 @@
 import { apiFetch } from '@/shared/api/client';
+import { downloadFile } from '@/lib/download';
+
+export interface RosterExportParams {
+  columns: string[];
+}
 
 export type RegistrationSource = 'SelfService' | 'StaffAdded';
 export type RegistrationStatus = 'Confirmed' | 'Cancelled';
@@ -63,3 +68,12 @@ export const setParticipantFieldValue = (
     `/api/v1/courses/${courseId}/registrations/${registrationId}/field-values`,
     { method: 'PATCH', body: data }
   );
+
+export const downloadRosterExport = (courseId: string, params: RosterExportParams): Promise<void> => {
+  const today = new Date().toISOString().slice(0, 10);
+  return downloadFile(
+    `/api/v1/courses/${courseId}/registrations/export`,
+    `course-${courseId}-participants-${today}.csv`,
+    { columns: params.columns },
+  );
+};
